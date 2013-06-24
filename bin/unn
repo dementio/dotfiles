@@ -1,0 +1,1 @@
+xterm +cu -fa DejaVuSansMono -fs 12 -title UnNeth@ck +pc -e telnet un.nethack.nu

@@ -1,0 +1,584 @@
+#
+# The Ruins of the Dwarrowdelf
+# by Guest41
+#
+
+#Shrine to the Ruins of the Endless Stair
+
+LEVEL: "moria1-1"
+FLAGS:hardfloor,mazelevel,noteleport
+GEOMETRY: center, center
+MAP
+...........................................................................
+...........................................................................
+...........................................................................
+...........................................................................
+...........................................................................
+...........................................................................
+...........................................................................
+...........................................................................
+...........................................................................
+...........................................................................
+...........................................................................
+............------FFF-----FFF-----FFF-----FFF-----FFF-----FFF-----FFF------
+............|.............................................................|
+............|.............................................................|
+............F.............................................................|
+............|.............................................................|
+............|.............................................................|
+............|.............................................................|
+............S.............................................................|
+............---------------------------------------------------------------
+ENDMAP
+REGION:(01,01,73,18),lit,"ordinary"
+TELEPORT_REGION:(15,12,70,18),(0,0,0,0)
+MON_GENERATION:50%, (7, "deep orc"), (3, 'o')
+BRANCH:(43,15,43,15),(0,0,0,0)
+STAIR:(71,02), up
+#
+
+ENGRAVING:(12,18),burn,"Herein lie the lower remnants of the Endless Stair."
+
+#Random piles of gems amongst pits of lava
+LOOP [20] {
+  $gempile = selection:circle(rndcoord(fillrect(03,03,09,15) & fillrect(13,03,65,08)), 2, filled)
+  LOOP [10] {
+    OBJECT:'*', rndcoord($gempile)
+    TERRAIN:rndcoord($gempile), 'L'
+  }
+}
+
+#And a little treasure yet to be extracted from the earth...
+LOOP [2d8] { OBJECT:('*',"small piece of unrefined mithril"),rndcoord(fillrect(15,12,70,18)),buried }
+
+#The Bridge of Khazad-dûm
+#(Why lava? Because holes look ugly.)
+
+LEVEL: "moria2-1"
+FLAGS:mazelevel,noflipx,noteleport
+GEOMETRY: center, center
+MAP
+---------------------------------------------------------------------------
+|..........LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+|..........LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL.|
+|..........LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..|
+|..........LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL...|
+|..........LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..---
+------.....LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..---
+    -----..LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..---
+ ------.....LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL...------
+ |........................................................................|
+ ------.....LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL...------
+  ------...LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..---
+----.......LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..---
+|..........LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..---
+|..........LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..|
+|..........LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL.|
+|..........LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+|..........LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+---------------------------------------------------------------------------
+ENDMAP
+REGION:(01,01,73,18),lit,"ordinary"
+TELEPORT_REGION:(01,01,10,17),(0,0,0,0)
+NON_DIGGABLE:(00,00,74,17)
+MON_GENERATION:60%, (7, "deep orc"), (3, 'o')
+STAIR:(73,09), up
+STAIR:(02,09), down
+#
+
+DOOR:open,(04,09)
+DOOR:open,(71,09)
+
+TRAP:"hole", (35,09)
+TRAP:"hole", (36,09)
+
+OBJECT:('%',"corpse"),(37,09),montype:"wizard"
+OBJECT:(')',"quarterstaff"),(37,09),eroded:2
+OBJECT:('[',"robe"),(37,09),eroded:1
+
+MONSTER: ('&',"Durin's Bane"),(66,09),hostile, awake {
+  OBJECT:(')', "bullwhip"),uncursed,erodeproof,1d7
+  [33%]: OBJECT:('[', "shield of reflection")
+  OBJECT:('/',"speed monster")
+  OBJECT:('!',"paralysis"),cursed
+}
+
+LOOP [2d4] {
+  OBJECT:('%',"corpse"),random,montype:"dwarf"
+  [50%]: OBJECT:('[',"dwarvish mithril-coat"),random,buried,cursed
+}
+
+LOOP [10] {
+  OBJECT:random,random
+}
+
+#Moria-tribute levels
+#Generally identical, but with a few small differences
+
+LEVEL: "moria3-1"	
+FLAGS:mazelevel
+GEOMETRY: center, center
+MAP
+                                    FFFFFFFFFFF
+                                    F.........F        FFFFFFFFFFF
+    FFFFFFFFFFFFFFFFFFFFFFFFFFFF    F.........F        F.........F
+    F..........................F    F.........F        F.........FFFFFFFFFF
+    F........FFFFFFF.FFFFFFFFF.F    FFF.FFFFFFF        F..................F
+    F........F     F.F       F.F      F.F              F.........FFFFFFFF.F
+    FFFFFFFF.F     F.F       F.FFFFFFFF.FFFFFFFFFFFFFFFF.........F      F.F
+           F.F     F.F       F...................................F      F.F
+           F.F     F.F       FFFFFFFFFFFFFFFF.FFFFFFFFFF.........F      F.F
+           F.F     F.F                      F.F        F.........F      F.F
+           F.F  FFFF.FFFFFFF                F.F        FFFFFFFFFFF      F.F
+           F.F  F..........F                F.F                         F.F
+FFFFFFFFFFFF.F  F..........FFFFFFFFFFFFFFFFFF.FFFFFFFFFFFFFFFFFFFFFFF   F.F
+F............F  F...................................................F   F.F
+F............FFFF..........FFFFFFFFFFFFFFFF.........................F   F.F
+F..........................F              F.........................FFFFF.F
+F............FFFF..........F              F...............................F
+F............F  FFFFFFFFFFFF              F.........................FFFFFFF
+FFFFFFFFFFFFFF                            F.........................F
+                                          FFFFFFFFFFFFFFFFFFFFFFFFFFF
+ENDMAP
+REGION:(01,01,73,18),random,"ordinary"
+NON_DIGGABLE:(00,00,74,17)
+MON_GENERATION:70%, (7, "deep orc"), (3, 'o')
+MESSAGE: "The dungeon here seems less persistent."
+SOUNDS:200, (feel, "the dungeon suddenly center itself around you!")
+$stairs = { (05,15), (08,04), (22,14), (42,02), (55,16), (60,04) }
+SHUFFLE:$stairs
+STAIR:$stairs[0], up
+STAIR:$stairs[1], down
+#
+
+#Level flavor
+LOOP [2d3] {
+  OBJECT:random,random
+  OBJECT:('?',"blank paper"),random,name:"Word of Recall"
+}
+
+LEVEL: "moria3-2"	
+FLAGS:mazelevel
+GEOMETRY: center, center
+MAP
+                                     FFFFFFFFFFF
+                        FFFFFFFFFFFFFF.........F      FFFFFFFFFFF
+    FFFFFFFFFF          F......................F      F.........F
+    F........F          F.FFFFFFFFFFFF.........F      F.........FFFFFFFFFFF
+    F........F          F.F          FFFFFFFFFFF      F...................F
+    F........F          F.F                           F.........FFFFFFFFF.F
+    FFFFFFFF.FFFFFFFFFFFF.FFFFFFFFFFFFFFFFFFFFFFFF    F.........F       F.F
+           F.....................................F    F.........F       F.F
+           F.FFFFFFF.FFFFFFFFFFFFFFFFFFFFFFFFFFF.F    F.........F       F.F
+           F.F     F.F                         F.F    F.........F       F.F
+           F.F  FFFF.FFFFFFF                   F.F    FFFF.FFFFFF       F.F
+           F.F  F..........F                   F.F       F.F            F.F
+FFFFFFFFFFFF.F  F..........FFFFFFFFFFFFFFFFFFFFF.FFFFFFFFF.FFFFFFFFFF   F.F
+F............F  F...................................................F   F.F
+F............FFFF..........FFFFFFFFFFFFFFFF.........................F   F.F
+F..........................F              F.........................FFFFF.F
+F............FFFF..........F              F...............................F
+F............F  FFFFFFFFFFFF              F.........................FFFFFFF
+FFFFFFFFFFFFFF                            F.........................F
+                                          FFFFFFFFFFFFFFFFFFFFFFFFFFF
+ENDMAP
+REGION:(01,01,73,18),random,"ordinary"
+NON_DIGGABLE:(00,00,74,17)
+MON_GENERATION:70%, (7, "deep orc"), (3, 'o')
+MESSAGE: "The dungeon here seems less persistent."
+SOUNDS:200, (feel, "the dungeon suddenly center itself around you!")
+$stairs = { (05,15), (08,04), (22,14), (44,02), (55,16), (59,04) }
+SHUFFLE:$stairs
+STAIR:$stairs[0], up
+STAIR:$stairs[1], down
+#
+
+#Level flavor
+LOOP [2d3] {
+  OBJECT:random,random
+  OBJECT:('?',"blank paper"),random,name:"Word of Recall"
+}
+
+LEVEL: "moria3-3"	
+FLAGS:mazelevel
+GEOMETRY: center, center
+MAP
+                                    FFFFFFFFFFF
+                                    F.........F        FFFFFFFFFFF
+    FFFFFFFFFFFFFFFFFFFFFFFFFFFF    F.........F        F.........F
+    F..........................F    F.........F        F.........FFFFFFFFFF
+    F........FFFFFFF.FFFFFFFFF.F    FFF.FFFFFFF        F..................F
+    F........F     F.F       F.F      F.F              F.........FFFFFFFF.F
+    FFFFFFFFFF     F.F       F.FFFFFFFF.FFFFFFFFFFFFFFFF.........F      F.F
+                   F.F       F...................................F      F.F
+                   F.F       FFFFFF.FFFFFFFFFFFFFFFFFFFF.........F      F.F
+                   F.F            F.F                  F.........F      F.F
+                FFFF.FFFFFFF      F.F                  FFFFFFFFFFF      F.F
+                F..........F      F.F                                   F.F
+FFFFFFFFFFFFFF  F..........F      F.F     FFFFFFFFFFFFFFFFFFFFFFFFFFF   F.F
+F............F  F..........F    FFF.FFF   F.........................F   F.F
+F............FFFF..........F    F.....F   F.........................F   F.F
+F..........................F    F.....F   F.........................FFFFF.F
+F............FFFF..........F    F.....F   F...............................F
+F............F  FFFFFFFFFFFF    FFFFFFF   F.........................FFFFFFF
+FFFFFFFFFFFFFF                            F.........................F
+                                          FFFFFFFFFFFFFFFFFFFFFFFFFFF
+ENDMAP
+REGION:(01,01,73,18),random,"ordinary"
+NON_DIGGABLE:(00,00,74,17)
+MON_GENERATION:70%, (7, "deep orc"), (3, 'o')
+MESSAGE: "The dungeon here seems less persistent."
+SOUNDS:200, (feel, "the dungeon suddenly center itself around you!")
+$stairs = { (05,15), (08,04), (22,14), (35,15), (42,02), (55,16), (60,04) }
+SHUFFLE:$stairs
+STAIR:$stairs[0], up
+STAIR:$stairs[1], down
+#
+
+#Level flavor
+LOOP [2d3] {
+  OBJECT:random,random
+  OBJECT:('?',"blank paper"),random,name:"Word of Recall"
+}
+
+#The Halls of Moria
+
+LEVEL: "moria4-1"
+FLAGS:hardfloor,mazelevel,noflip
+GEOMETRY: center, center
+MAP
+---------------------------------------------------------------------------
+|.........................................................................|
+|.........................................................................|
+|........---......---......---......---......---......---......---........|
+|........| |......| |......| |......| |......| |......| |......| |........|
+|........---......---......---......---......---......---......---........|
+|.........................................................................|
+|.........................................................................|
+|........---......---......---......---......---......---......---........|
+|........| |......| |......| |......| |......| |......| |......| |........|
+|........---......---......---......---......---......---......---........|
+|.........................................................................|
+|.........................................................................|
+|........---......---......---......---......---......---......---........|
+|........| |......| |......| |......| |......| |......| |......| |........|
+|........---......---......---......---......---......---......---........|
+|.........................................................................|
+|.........................................................................|
+---------------------------------------------------------------------------
+ENDMAP
+REGION:(01,01,73,18),random,"ordinary"
+NON_DIGGABLE:(00,00,74,17)
+MON_GENERATION:90%, (7, "deep orc"), (3, 'o')
+STAIR:random, up
+STAIR:random, down
+#
+
+#Orcs and trolls enough to kill you until you die to death,
+#and loot enough for them to have a decent chance of success.
+#Players can either imagine themselves engaging in fierce
+#battle with seemingly endless waves of orcish foes, or
+#imagine themselves playing with a bowl of Cheerios.
+#The magic of roguelikes is in choices like these. 
+LOOP [20] {
+  MONSTER: ('o', "orc-captain"), random, hostile { [25%]: OBJECT:('(', "oil lamp"),lit }
+  MONSTER: ('o', "hill orc"), random, hostile
+  MONSTER: ('o', "deep orc"), random, hostile
+  OBJECT:random,random
+  [10%]: MONSTER: 'T', random, hostile
+  [20%]: OBJECT:('[',"dwarvish mithril-coat"),random,blessed,1d5
+}
+
+#The Forest of BlastHardcheese
+
+LEVEL: "moria5-1"
+FLAGS:hardfloor,mazelevel,sky
+GEOMETRY: center, center
+MAP
+    |....................................................................|..
+    |................................................................{{..|..
+    |....................................................................|..
+    |..................................................................---F-
+   --..................................................................|....
+   |...................................................................|....
+   |...................................................................|....
+-----..............................................................------S--
+|...|..............................................................|........
+|...S..............................................................S........
+|...|..............................................................|........
+-----..............................................................------S--
+   |...................................................................|....
+   |...................................................................|....
+   --..................................................................|....
+    |..................................................................---F-
+    |....................................................................|..
+    |................................................................{{..|..
+    |....................................................................|..
+ENDMAP
+REGION:(01,01,74,17),lit,"ordinary"
+NON_DIGGABLE:(00,00,75,18)
+MON_GENERATION:10%, (7, "deep orc"), (3, 'o')
+STAIR:(02,09), down
+STAIR:(72,09), up
+
+#Untamed woodland
+REPLACE_TERRAIN:(06,00,65,18), '.', 'T', 20%
+REPLACE_TERRAIN:(06,00,65,18), '.', 't', 05%
+
+#Abandoned campsites
+LOOP [2d4] { TRAP:"bear",random }
+LOOP [2d6] { OBJECT:random,random }
+LOOP [2d8] { OBJECT:'%',random }
+
+#Orcish barracks
+#Due to intense boredom, they are not necessarily hostile.
+MONSTER: ('o',"deep orc"),(72,04)
+MONSTER: ('o',"deep orc"),(73,04)
+MONSTER: ('o',"deep orc"),(74,04)
+MONSTER: ('o',"deep orc"),(75,04)
+MONSTER: ('o',"deep orc"),(72,05)
+MONSTER: ('o',"deep orc"),(73,05)
+MONSTER: ('o',"deep orc"),(74,05)
+MONSTER: ('o',"deep orc"),(75,05)
+MONSTER: ('o',"deep orc"),(72,06)
+MONSTER: ('o',"deep orc"),(73,06)
+MONSTER: ('o',"deep orc"),(74,06)
+MONSTER: ('o',"deep orc"),(75,06)
+MONSTER: ('o',"deep orc"),(72,12)
+MONSTER: ('o',"deep orc"),(73,12)
+MONSTER: ('o',"deep orc"),(74,12)
+MONSTER: ('o',"deep orc"),(75,12)
+MONSTER: ('o',"deep orc"),(72,13)
+MONSTER: ('o',"deep orc"),(73,13)
+MONSTER: ('o',"deep orc"),(74,13)
+MONSTER: ('o',"deep orc"),(75,13)
+MONSTER: ('o',"deep orc"),(72,14)
+MONSTER: ('o',"deep orc"),(73,14)
+MONSTER: ('o',"deep orc"),(74,14)
+MONSTER: ('o',"deep orc"),(75,14)
+
+#Prisoners
+#There is a way to free them if you're clever.
+MONSTER: ('h',"dwarf"),(74,00),peaceful
+MONSTER: ('h',"dwarf"),(75,00),peaceful
+MONSTER: ('h',"dwarf"),(74,01),peaceful
+MONSTER: ('h',"dwarf"),(75,01),peaceful
+MONSTER: ('h',"dwarf"),(74,02),peaceful
+MONSTER: ('h',"dwarf"),(75,02),peaceful
+MONSTER: ('h',"dwarf"),(74,16),peaceful
+MONSTER: ('h',"dwarf"),(75,16),peaceful
+MONSTER: ('h',"dwarf"),(74,17),peaceful
+MONSTER: ('h',"dwarf"),(75,17),peaceful
+MONSTER: ('h',"dwarf"),(74,18),peaceful
+MONSTER: ('h',"dwarf"),(75,18),peaceful
+
+#The Doors of Durin, abandoned, w/altar
+#Strictly speaking, this is the West-gate, but
+#since it can flip anyway it doesn't really matter.
+
+LEVEL: "moria6-1"
+FLAGS:graveyard,hardfloor,mazelevel,sky
+GEOMETRY: center, center
+MAP
+-----FFF--------------------------------------...........}}}}}}}}}}}}}
+|...........|.|.|.|.|...............|........|..........}}}}}}}}}}}}}}}}}}
+|-..........|.......|...............|-......-|.....T....}}}}}}}}}}}}}}}}}}}}
+|...........+.......|...............|........|...........}}}}}}}}}}}}}}}}}}}
+|-..........+.......S...............|-......-|...T........}}}}}}}}}}}}}}}}}}
+|...........|.......|...............|........|............}}}}}}}}}}}}}}}}}
+|-..........|.......|...............|----+---|.......T...}}}}}}}}}}}}}}}}}}
+|..|.|.|.|..|.|.|.|.|...............S........|...........}}}}}}}}}}}}}}}}}}
+|--------------------------+------------------...........}}}}}}}}}}}}}}}}}}}
+|..........................................|............}}}}}}}}}}}}}}}}}}}}
+|..........................................S............}}}}}}}}}}}}}}}}}}}
+|.....{....................................|............}}}}}}}}}}}}}}}}}}}
+|...........---------------+------------------...........}}}}}}}}}}}}}}}}}}}
+|...........|....|...........................|...........}}}}}}}}}}}}}}}}}}}
+|...........|....|...........................|.......T...}}}}}}}}}}}}}}}}}}}
+|--FF---FF--|....|...........................|............}}}}}}}}}}}}}}}}}
+|...........|....|...........................|...T........}}}}}}}}}}}}}}}}}
+|...........S....S...........................|...........}}}}}}}}}}}}}}}}}}
+|...........|....|...........................|.....T....}}}}}}}}}}}}}}}}}}
+----------------------------------------------.........}}}}}}}}}}}}}}}}}}
+ENDMAP
+REGION:(01,01,75,20),lit,"ordinary"
+TELEPORT_REGION:(01,16,11,18),(0,0,0,0)
+SOUNDS:200, (hear, "the sound of restless waters.")
+NON_DIGGABLE:(00,00,75,20)
+MON_GENERATION:40%, (8, "deep orc"), (2, 'o')
+STAIR:(04,17), down
+#
+
+#Welcoming committee
+REGION:(13,13,16,18),unlit,"morgue"
+
+#Specific doors
+DOOR:closed,(12,03)
+DOOR:closed,(12,04)
+DOOR:locked,(20,04)
+DOOR:closed,(27,08)
+DOOR:closed,(27,12)
+DOOR:closed,(41,06)
+
+#Twenty-first Hall
+OBJECT:('*',"rock"),(30,04),quantity:21
+OBJECT:('*',"flint"),(30,04)
+OBJECT:('%',"lembas wafer"),(30,04)
+
+#Chamber of Mazarbul
+GRAVE:(06,03), "Balin, Son of Fundin, Lord of Moria"
+OBJECT:('(',"magic harp"),(06,03),uncursed,buried
+OBJECT:"statue",(01,07),montype:('h', "dwarf"),1
+OBJECT:"statue",(02,07),montype:('h', "dwarf"),1
+OBJECT:"statue",(10,07),montype:('h', "dwarf"),1
+OBJECT:"statue",(11,07),montype:('h', "dwarf"),1
+CONTAINER:"chest", (01,01) { OBJECT:'?',blessed }
+CONTAINER:"chest", (01,03) { OBJECT:'+',blessed }
+CONTAINER:"chest", (01,05) { OBJECT:'!',blessed }
+CONTAINER:"chest", (04,07) { OBJECT:'/',blessed }
+CONTAINER:"chest", (06,07) { OBJECT:'"',blessed }
+CONTAINER:"chest", (08,07) { OBJECT:'=',blessed }
+
+#Random loot
+$chests = { (13,01), (15,01), (17,01), (19,01), (13,07), (15,07), (17,07), (19,07) }
+CONTAINER:"chest", $chests[0] { OBJECT:random,quantity:1d3 }
+CONTAINER:"chest", $chests[1] { OBJECT:random,quantity:1d3 }
+CONTAINER:"chest", $chests[2] { OBJECT:random,quantity:1d3 }
+CONTAINER:"chest", $chests[3] { OBJECT:random,quantity:1d3 }
+CONTAINER:"chest", $chests[4] { OBJECT:random,quantity:1d3 }
+CONTAINER:"chest", $chests[5] { OBJECT:random,quantity:1d3 }
+CONTAINER:"chest", $chests[6] { OBJECT:random,quantity:1d3 }
+CONTAINER:"chest", $chests[7] { OBJECT:random,quantity:1d3 }
+
+#Warehouse
+LOOP [5 + 2d4] { OBJECT:'(',rndcoord(fillrect(18,13,44,18)) }
+
+#Abandoned altar
+ALTAR:(41,03),noncoaligned,altar
+$altarcontainers = { (44,01), (44,03), (44,05), (37,01), (37,03), (37,05) }
+SHUFFLE:$altarcontainers
+OBJECT:('(',"ice box"), $altarcontainers[0]
+OBJECT:('(',"iron safe"), $altarcontainers[1]
+OBJECT:('(',"iron safe"), $altarcontainers[2]
+OBJECT:('(',"large box"), $altarcontainers[3]
+OBJECT:('(',"large box"), $altarcontainers[4]
+OBJECT:('(',"large box"), $altarcontainers[5]
+
+#Ithildin engraving
+#(If you don't first arrive on the level at night, you'll never notice it.)
+IF [time.night == 1] { ENGRAVING:(44,10),engrave,"Speak, friend, and enter." }
+OBJECT:('%',"melon"),(44,10),quantity:1
+
+#These are now more useful as an infinite light source than for the wish.
+MONSTER: (';',"Watcher in the Water"),(66,10) { OBJECT:('(', "magic lamp"),uncursed }
+
+#The Doors of Durin, destroyed, w/o altar
+
+LEVEL: "moria6-2"
+FLAGS:graveyard,hardfloor,mazelevel,sky
+GEOMETRY: center, center
+MAP
+-----FFF--------------------------------------...........}}}}}}}}}}}}}
+|...........|.|.|.|.|...............|........|..........}}}}}}}}}}}}}}}}}}
+|-..........|.......|...............|-......-|.....t....}}}}}}}}}}}}}}}}}}}}
+|...........+.......|...............|........|...........}}}}}}}}}}}}}}}}}}}
+|-..........+.......+...............|-......-|...t........}}}}}}}}}}}}}}}}}}
+|...........|.......|...............|........|............}}}}}}}}}}}}}}}}}
+|-..........|.......|...............|----+---|.......t...}}}}}}}}}}}}}}}}}}
+|..|.|.|.|..|.|.|.|.|...............S........|...........}}}}}}}}}}}}}}}}}}
+|--------------------------+------------------........}}}}}}}}}}}}}}}}}}}}}}
+|..........................................|}.}....}}}}}}}}}}}}}}}}}}}}}}}}}
+|............................................}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+|.....{....................................|}.}....}}}}}}}}}}}}}}}}}}}}}}}}
+|...........---------------+------------------........}}}}}}}}}}}}}}}}}}}}}}
+|...........|....|...........................|...........}}}}}}}}}}}}}}}}}}}
+|...........|....|...........................|.......t...}}}}}}}}}}}}}}}}}}}
+|--FF---FF--|....|...........................|............}}}}}}}}}}}}}}}}}
+|...........|....|...........................|...t........}}}}}}}}}}}}}}}}}
+|...........S....S...........................|...........}}}}}}}}}}}}}}}}}}
+|...........|....|...........................|.....t....}}}}}}}}}}}}}}}}}}
+----------------------------------------------.........}}}}}}}}}}}}}}}}}}
+ENDMAP
+REGION:(01,01,75,20),lit,"ordinary"
+TELEPORT_REGION:(01,16,11,18),(0,0,0,0)
+SOUNDS:200, (hear, "the sound of restless waters.")
+NON_DIGGABLE:(00,00,75,20)
+MON_GENERATION:60%, (8, "deep orc"), (2, 'o')
+STAIR:(04,17), down
+#
+
+#Welcoming committee
+REGION:(13,13,16,18),unlit,"morgue"
+
+#Specific doors (and their status)
+$doors = { (12,03), (12,04), (20,04), (27,08), (27,12), (41,06) }
+SHUFFLE:$doors
+DOOR:closed,$doors[0]
+DOOR:closed,$doors[1]
+DOOR:broken,$doors[2]
+DOOR:broken,$doors[3]
+DOOR:broken,$doors[4]
+DOOR:broken,$doors[5]
+OBJECT:('`',"boulder"),$doors[4]
+OBJECT:('`',"boulder"),$doors[5]
+OBJECT:('`',"boulder"),(43,10)
+
+LOOP [10 + 2d5] {
+  [90%]: OBJECT:('`',"boulder"),random
+  OBJECT:('*',"rock"),random
+}
+
+#Twenty-first Hall
+OBJECT:('%',"corpse"),rndcoord(fillrect(21,01,35,07)),montype:"hobbit"
+OBJECT:('%',"corpse"),rndcoord(fillrect(21,01,35,07)),montype:"hobbit"
+OBJECT:('%',"corpse"),rndcoord(fillrect(21,01,35,07)),montype:"hobbit"
+OBJECT:('%',"corpse"),rndcoord(fillrect(21,01,35,07)),montype:"hobbit"
+OBJECT:('%',"corpse"),rndcoord(fillrect(21,01,35,07)),montype:"human"
+OBJECT:('%',"corpse"),rndcoord(fillrect(21,01,35,07)),montype:"dwarf"
+OBJECT:('%',"corpse"),rndcoord(fillrect(21,01,35,07)),montype:"elf"
+
+#Chamber of Mazarbul
+GRAVE:(06,03), "Balin, Son of Fundin, Lord of Moria"
+OBJECT:('(',"magic harp"),(06,03),uncursed,buried
+OBJECT:('*',"rock"),(01,07),quantity:1d25
+OBJECT:('*',"rock"),(02,07),quantity:1d25
+OBJECT:('*',"rock"),(10,07),quantity:1d25
+OBJECT:('*',"rock"),(11,07),quantity:1d25
+CONTAINER:"chest", (01,01) { OBJECT:'?' }
+CONTAINER:"chest", (01,03) { OBJECT:'+' }
+CONTAINER:"chest", (01,05) { OBJECT:'!' }
+CONTAINER:"chest", (04,07) { OBJECT:'/' }
+CONTAINER:"chest", (06,07) { OBJECT:'"' }
+CONTAINER:"chest", (08,07) { OBJECT:'=' }
+
+#Random loot
+$chests = { (13,01), (15,01), (17,01), (19,01), (13,07), (15,07), (17,07), (19,07) }
+[50%]: CONTAINER:"chest", $chests[0] { OBJECT:random,quantity:1d2 }
+[50%]: CONTAINER:"chest", $chests[1] { OBJECT:random,quantity:1d2 }
+[50%]: CONTAINER:"chest", $chests[2] { OBJECT:random,quantity:1d2 }
+[50%]: CONTAINER:"chest", $chests[3] { OBJECT:random,quantity:1d2 }
+[50%]: CONTAINER:"chest", $chests[4] { OBJECT:random,quantity:1d2 }
+[50%]: CONTAINER:"chest", $chests[5] { OBJECT:random,quantity:1d2 }
+[50%]: CONTAINER:"chest", $chests[6] { OBJECT:random,quantity:1d2 }
+[50%]: CONTAINER:"chest", $chests[7] { OBJECT:random,quantity:1d2 }
+
+#Warehouse
+LOOP [5 + 2d4] { OBJECT:'(',rndcoord(fillrect(18,13,44,18)) }
+
+#Abandoned altar
+OBJECT:('`',"boulder"),(41,03)
+$altarcontainers = { (44,01), (44,03), (44,05), (37,01), (37,03), (37,05) }
+SHUFFLE:$altarcontainers
+[75%]:OBJECT:('(',"ice box"), $altarcontainers[0]
+[75%]:OBJECT:('(',"iron safe"), $altarcontainers[1]
+[75%]:OBJECT:('(',"iron safe"), $altarcontainers[2]
+[75%]:OBJECT:('(',"large box"), $altarcontainers[3]
+[75%]:OBJECT:('(',"large box"), $altarcontainers[4]
+[75%]:OBJECT:('(',"large box"), $altarcontainers[5]
+
+#Ithildin engraving (destroyed in this version)
+#IF [time.night == 1] { ENGRAVING:(44,10),engrave,"Speak, friend, and enter." }
+OBJECT:('%',"melon"),(44,10),quantity:1
+
+LOOP [10 + 2d5] { MONSTER:  ('o', "deep orc"), random, hostile }
+MONSTER: (';',"Watcher in the Water"),(66,10) { OBJECT:('(', "magic lamp"),uncursed }

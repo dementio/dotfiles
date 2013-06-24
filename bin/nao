@@ -1,0 +1,1 @@
+xterm +cu -fa DejaVuSansMono -fs 12 -title alt.NetHack.org +pc -e telnet nethack.alt.org

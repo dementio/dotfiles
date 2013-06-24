@@ -1,0 +1,110 @@
+OPTIONS=name:Jim,gender:male
+OPTIONS=scores:10 top/2 around/own
+OPTIONS=IBMGraphics
+OPTIONS=menustyle:partial
+OPTIONS=mouse_support,checkpoint
+OPTIONS=dogname:Spot,catname:Patch,horsename:Silver,fruit:Mango
+OPTIONS=autoquiver,autodig,number_pad:2
+OPTIONS=windowtype:curses,pushweapon,nosparkle
+OPTIONS=msg_window:reversed,showscore,time,showscore,show_dgn_name
+OPTIONS=monsters:abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@X7&;:~]
+OPTIONS=!cmdassist,pickup_burden=U,paranoid_hit,paranoid_quit,paranoid_remove,pilesize:1
+OPTIONS=autopickup,pickup_thrown
+OPTIONS=pickup_types:$"=/!?+
+OPTIONS=showbuc,hilite_pet,color,lit_corridor,DECgraphics
+OPTIONS=boulder:0
+OPTIONS=disclose:yiyayvygyc
+OPTIONS=menucolors
+OPTIONS=suppress_alert=3.5.0
+MENUCOLOR=" \(uncursed\)"=white
+MENUCOLOR=" \(blessed\)"=green
+MENUCOLOR=" \(cursed\)"=red
+MENUCOLOR=" wand"=
+MENUCOLOR=" \((in quiver)\|(weapon in hand)\|(wielded in other hand)\)"=cyan
+MENUCOLOR=" \(lamp\|horn.*plenty\|brass lantern\|credit card\|key\|lock pick\|stethoscope\)"=brown
+MENUCOLOR=" \(wand.*secret door detection\|magic mapping\|a.*pick-axe\|scroll.*earth\|wand.*digging\)"=brown
+MENUCOLOR=" \(food ration\|gunyoki\|lembas wafer\|royal jelly\|mango\|cram ration\)"=brown
+MENUCOLOR=" \(\+[2-5]\|mithril-coat\|scroll.*identify\)"=white
+MENUCOLOR=" \(wand.*\(of\|called\).*\(cancel.*\|vanish\)\|bag.*tricks\|lizard corpse\)"=blue
+MENUCOLOR=" \(scroll.*(unpaid, [12][1-9] \|ring.*[23]00\|spellbook.*[5-7]\|wand.*\(175\|200\|[5-7]..\)\)"=cyan
+MENUCOLOR=" \(scroll.*\(60\|80\|300\)\|potion.*300\|\(old\|padded\|riding\|fencing\) gloves\)"=cyan
+MENUCOLOR=" \(plumed\|etched\|crested\|visored\) helmet\|\(mud\|buckled\|riding\|snow\|hiking\|combat\|jungle\) boots"=cyan
+MENUCOLOR=" \(tattered cape\|opera cloak\|ornamental cope\|piece of cloth\|gray stone\|a bag\)"=cyan
+MENUCOLOR=" \(ring.*levitation\|levitation boots\|boots.*levitation\|wand.*\(poly\|tele\|death\)\|conflict\)"=magenta
+MENUCOLOR=" \(magic whistle\|whistle.*magic\|free action\|called tc\|silver\|teleport control\)"=magenta
+MENUCOLOR=" \(cloak .* \(mr\|magic resistance\)\|robe\|oilskin\|dragon scale mail\|speed boots\|boots.*speed\)"=magenta
+MENUCOLOR= "\(\(glove\|gauntlet\).*\(power\|dexterity\)\|brilliance\|elven leather helm\|leather hat\|opposite alignment\)"=magenta
+MENUCOLOR=" \(called.*[oO][aA]\|shield.*refl\|shirt\|a.*unicorn horn\|stone.*luck\|luckstone\|wand.*polymorph\)"=magenta
+MENUCOLOR=" \(towel\|blindfold\|candles?\|gold detection\|remove curse\|\+[67]\|[CK]-ration\)"=magenta
+MENUCOLOR= "\(c\(o\|hi\)ckatrice \(corpse\|egg\)\|tinning kit\|slow digestion\|charging\|spinach\|reflection\)"=magenta
+MENUCOLOR=" holding"=magenta&bold
+MENUCOLOR=" cockatrice corpse (weapon"=magenta&inverse
+MENUCOLOR=" \(Yendor.*named\|[Cc]andelabrum\|silver bell\|Bell of Opening\|papyrus spellbook\|Book of the Dead\)"=yellow
+MENUCOLOR=" \(Orb of \(Detection\|Fate\)\|Heart of Ahriman\|Sceptre of Might\|Staff of Aesculapius\|Magic Mirror of Merlin\|Excalibur\)"=yellow
+MENUCOLOR=" \(Eyes of the Overworld\|Mitre of Holiness\|Longbow of Diana\|Master Key of Thievery\|Tsurugi of Muramasa\|Grayswandir\)"=yellow
+MENUCOLOR=" \(Platinum Yendorian Express Card\|Frost Brand\|Fire Brand\|Eye of the Aethiopica\|Mjollnir\|Magicbane\|Stormbringer\|Cleaver\)"=yellow
+MENUCOLOR=" \(Snickersnee\|Sting\)"=yellow
+MENUCOLOR=" \(scroll.*\(enchant\|geno\(cide\)?\)\|gain ability\|magic \(lamp\|marker\)\|lamp.*magic\|wand.*wish\|gold pieces\|gain level\)"=yellow&bold
+MENUCOLOR=" \(water\|clear potion\)"=blue
+MENUCOLOR=" \(unholy water\|cursed clear\|blessed potion.*water\)"=lightcyan
+MENUCOLOR=" \(holy water\|blessed clear\|cursed potion.*water\)"=lightcyan
+MENUCOLOR=" \(blank paper\|unlabeled scroll\)"=underline
+MENUCOLOR=" uncursed.* \(blank paper\|unlabeled scroll\)"=cyan&underline
+MENUCOLOR=" cursed.* \(blank paper\|unlabeled scroll\)"=red&underline
+MENUCOLOR=" blessed.* \(blank paper\|unlabeled scroll\)"=green&underline
+MENUCOLOR=" \(potion.*healing\|potion.*extra healing\|potion.*full healing\|amulet.*life saving\|tin.*nurse\)"=lightgreen
+MENUCOLOR=" \(lightning\|wand.*fire\|athame$\)"=lightgreen
+MENUCOLOR=".*(lit).*"=white
+MENUCOLOR=" \(.*named empty\|(.*:0)\)"=
+MENUCOLOR=" \(magic marker.*(0:.*)\|wand.*wishing.*(0:.*)\)=yellow&bold
+MENUCOLOR=" magic marker.* (1:[0-5])"=brown # it's useless now
+MENUCOLOR=" ring.*polymorph"=lightcyan
+MENUCOLOR=" \(bugle\|flute\|harp\)"=cyan
+MENUCOLOR=" \+[4-9].*(being worn)"=lightmagenta 
+MENUCOLOR=" gem"=cyan
+MENUCOLOR=" \(dilithium crystal\|diamond\|rubies\|ruby\|jacinth\|sapphire\|black opal\|emerald\|turquoise\|aquamarine\)\(s\| [^rp]\|$\)"=lightcyan
+MENUCOLOR=" \(citrine\|amber\|topaz\|jet\|opal\|chrysoberyl\|garnet\|amethyst\|jasper\|fluorite\|jade\|agate\|obsidian\)\(s\| [^rp]\|$\)"=lightcyan
+MENUCOLOR=" worthless"=brown
+MENUCOLOR=" \(strangulation (being worn)\|cursed.*gray stone\|cursed.*luckstone\|loadstone\|restful sleep (being worn)\|dunce cap (being worn)\)"=red&inverse
+MENUCOLOR=" \(\-[3-9].*(being worn)\|heavy iron ball\|destroy armor\|amnesia\|punishment\|scroll.*fire\)"=red&bold
+MENUCOLOR=" -[1-2].*(being worn)"=red
+MENUCOLOR=" \(cursed bag.*holding\|cursed.*unicorn horn\)"=red&inverse
+MENUCOLOR=" \(cursed scroll.*gold detection\|uncursed.*booze\|booze.*uncursed\)"=lightmagenta
+MENUCOLOR=" \(gold detection.* cursed\|cursed.*gain level\|potion.*confusion\|cursed.*confuse monster\)"=lightmagenta
+MENUCOLOR=" 0%"=white
+MENUCOLOR=" [1-9]%"=cyan
+MENUCOLOR=" [12][0-9]%"=cyan
+MENUCOLOR=" [3-6][0-9]%"=yellow
+MENUCOLOR=" 7[0-5]%"=yellow
+MENUCOLOR=" 7[6-9]%"=magenta
+MENUCOLOR=" 8[0-9]%"=magenta
+MENUCOLOR=" 9[0-9]%"=red
+MENUCOLOR=" 100%"=red
+MENUCOLOR="[a-zA-Z] - [a-zA-Z ]+ [0-9]\*   [a-z]+ +[0-9]+%"=blue
+MENUCOLOR="Grand Master"=lightmagenta
+MENUCOLOR="Master"=magenta
+MENUCOLOR="Expert"=cyan
+MENUCOLOR="Skilled"=lightblue
+MENUCOLOR="Basic"=white
+MENUCOLOR=" is empty. Do what?"=none
+MENUCOLOR="Put something into .*"=green
+MENUCOLOR="Take something out of .*"=cyan
+OPTIONS=statuscolors 
+STATUSCOLOR=hp%100=green,hp%66=yellow,hp%50=magenta
+STATUSCOLOR=hp%33=red&bold,hp%15:red&inverse,hp%0:red&inverse&blink
+STATUSCOLOR=pw%100=green,pw%66=yellow,pw%50:orange,pw%33=red&bold
+STATUSCOLOR=burdened:yellow,stressed:orange,strained:red&bold
+STATUSCOLOR=overtaxed:red&inverse,overloaded:red&inverse&blink
+STATUSCOLOR=satiated:magenta&inverse,hungry:orange,weak:red&inverse
+STATUSCOLOR=fainting:red&inverse,fainted:red&inverse&blink
+STATUSCOLOR=hallu:yellow,conf:magenta&bold,stun:red&bold
+STATUSCOLOR=ill:red&inverse,foodpois:red&inverse,slime:red&inverse
+STATUSCOLOR=held:red&inverse,lev:green&inverse
+STATUSCOLOR=blind:blue&inverse
+STATUSCOLOR=Chaotic:brown,Lawful:cyan&bold,Neutral:white
+STATUSCOLOR=Dungeons of Doom:white,Gnomish Mines:brown,Gehennom:red&bold,Quest:cyan&bold,Home:cyan&bold,Sokoban:lightblue&bold
+STATUSCOLOR=Plane of Air:lightmagenta&bold,Plane of Water:lightmagenta&bold,Plane of Fire:lightmagenta&bold,Plane of Earth:lightmagenta&bold,Astral Plane:lightmagenta&bold
+STATUSCOLOR=Medusa:lightgreen&bold,Minetown:lightgreen&bold,Sanctum:yellow&bold,Castle:lightgreen&bold,Valley:yellow&bold
+STATUSCOLOR=End:lightgreen&bold
+STATUSCOLOR=hpbar_full:green&inverse,hpbar_high:cyan&inverse,hpbar_medium:yellow&inverse,hpbar_low:magenta&inverse,hpbar_verylow:red&inverse,hpbar_critical:red&inverse,hpbar_black:none
+OPTIONS=packorder:"=[)%!?+/(*0_`

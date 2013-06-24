@@ -1,0 +1,290 @@
+#!/bin/bash
+
+# xswitch - Launch applications on a new xserver.
+#
+# Partly based on:
+#    podencoder
+#    winefix  
+
+# Copyright (C) 2007, John Simpkins
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+# 02110-1301  USA
+VERSION="0.8"
+
+# The tty new xservers will be started upon by default. "0" is tty 7, "1" tty8 and
+# so on.
+NEW_DISPLAY="1"
+
+# Set to "1" to stop the original xserver after starting the first
+XSWITCH=""
+
+# The display number of the original Xserver. 
+DISPLAY="0"
+
+# Parse command-line options
+while getopts ":d:su" options; do
+	case $options in
+	d) NEW_DISPLAY=$OPTARG;;
+	s) XSWITCH=1;;
+	u) cat <<EOF
+xswitch $VERSION
+Copyright (C) 2007, Jack Simpkins
+This program is free software.  You can redistribute it and/or modify it under
+the terms the GNU General Public License version 2 or, at your option,
+any later version published by the Free Software Foundation.  There is
+NO WARRANTY, to the extent permitted by law.
+EOF
+	exit 1;;
+	*) cat <<EOF
+Usage: xswith [OPTIONS] [COMMAND]
+
+COMMAND can be up to 11 applications. The first is the "primary" app; when it
+terminates, a dialog appears informing the user of how to get back to their desktop. 
+
+All flags are optional
+  -d	The tty used to display the new xserver.
+  -s	Set to stop the display manager after a new xserver is executed.
+  -u	Display this usage message.
+
+Report bugs to <jack.simpkins@gmail.com>.
+EOF
+	exit 1;;
+	esac
+done
+shift $(($OPTIND - 1))
+
+# Display zenity messages if using a gui, otherwise fall back to console.
+DIE() {
+	if [ $gui ]
+	then
+		DISPLAY=:"$DISPLAY" zenity --error --title="Xswitch" --text="Xswitch has crashed! $@"
+	else
+		echo -e "Xswitch has crashed! $@" >/dev/stderr
+	fi
+	EXIT
+}
+
+WARN() {
+	if [ $gui ]
+	then
+		DISPLAY=:"$DISPLAY" zenity --warning --title="Xswitch" --text="Warning:\n\n$1"
+	else
+		echo -e "Warning: $1" >/dev/stderr
+	fi
+	exit 1
+}
+
+ASK() {
+	if [ $gui ]
+	then
+		DISPLAY=:"$DISPLAY" zenity --question --title="Xswitch" --text "$1"
+		return $?
+	else
+		echo -e "$1"
+		select i in yes no
+ 		do 
+ 			[ "$i" = "no" ] && return 1
+			[ "$i" = "yes" ] && return 0
+		done
+	fi
+}
+
+EXIT() {
+	# Revert Xwrapper back to its original state
+	if [ -a /etc/X11/Xwrapper.config.bak ]
+	then
+		sudo mv /etc/X11/Xwrapper.config.bak /etc/X11/Xwrapper.config
+	fi
+	# Remove nohup logs
+	if [ $XSWITCH ]
+	then
+		rm -f $HOME/.xswitch/nohup.out
+	fi
+	# Reset the display
+	export DISPLAY="0"
+	# Disable Window Manager workarounds
+	if [ $WINDOW_MANAGER ] && [ $WINDOW_MANAGER2 ] && [ ! $XSWITCH ]
+	then
+		sleep 2
+		REPLACE $WINDOW_MANAGER2 &
+		wait
+	fi
+	exit 1
+}
+
+# Check to see if we were started without arguments
+if [ $# -eq 1 -a "$1" = "" ] || [ $# -eq 0 ]
+then
+	echo "xswitch called without arguments. For usage information, run xswitch -u"
+	exit 1
+fi
+
+# Check to see if we're being run from a gui, terminal, ot tty.
+TTYTEST=`tty`
+VTTEST=`echo $TTYTEST | grep -o -i /dev/tty`
+if [ "$TTYTEST" = 'not a tty' ]
+then
+	gui=1
+fi
+
+# Is zenity installed?
+if [ $gui ]
+then
+	if [ -z "$(which zenity)" ]
+	then
+		echo "Warning: \"zenity\" is not installed. Please install it in order to use this script."
+		gui=""
+		exit 1
+	fi
+fi
+
+# Catch termiation singals so that we can be sure that temporary files get removed.
+trap EXIT SIGHUP SIGINT SIGPIPE SIGTERM
+
+if [ $XSWITCH ]
+then
+	# If run with nohup or a tty, continue.
+	if [ -a $HOME/.xswitch/nohup.out ] || [ $VTTEST ]
+	then
+		# Check which display manager to use - gdm by default and then, if found, kdm.
+		if [ -z "$(which kdm)" ]
+		then
+			DISPLAYMANAGER="gdm"
+		else
+			DISPLAYMANAGER="kdm"
+		fi
+	elif [ $gui ]
+	then
+		WARN "\n\nTo use the \"-s\" switch, xswitch must be run from a terminal or tty."
+	else
+		nohup $0 -s 1 -d $NEW_DISPLAY "$@" >$HOME/.xswitch/nohup.out &
+		sleep 2
+		exit 1
+	fi
+fi
+
+# Create the log directory if it doesn't already exist.
+if [ ! -e "$HOME/.xswitch/" ] && [ $XSWITCH ]
+then
+	mkdir "$HOME/.xswitch/"
+fi
+
+# Ask for permission to check /etc/X11/Xwrapper.config
+# Make sure we can find Xwrapper.config, and if not, that we have permission to run an xserver.
+if [ $gui ]
+then
+	DISPLAY=:"$DISPLAY" gksudo -D "xswitch" "sudo -v"
+	wait
+else
+	sudo -v
+	wait
+fi
+CHECK=`sudo grep allowed_users=anybody /etc/X11/Xwrapper.config`
+if [ ! -f /etc/X11/Xwrapper.config ]
+then
+	if ASK "The file \"/etc/X11/Xwrapper.config\" could not be found.\n\nAre non-root users allowed to run an xserver?"
+	then
+		:
+	else
+		ROOT="sudo"
+	fi
+	CHECK=1
+fi
+
+# If Xwrapper.conf isn't properly set up, ask if we can change it.
+if [ ! "$CHECK" ]
+then
+	if ASK "Temporarily permit all users the ability to run an xserver?"
+	then
+		sudo cp /etc/X11/Xwrapper.config /etc/X11/Xwrapper.config.bak
+		sudo cat /etc/X11/Xwrapper.config.bak | sudo sed '/allowed_users/ c allowed_users=anybody' | sudo tee /etc/X11/Xwrapper.config &>/dev/null
+	else
+		if ASK "Xservers will be run as root. Continue?"
+		then
+			ROOT="sudo"
+		else
+			exit 1
+		fi
+	fi
+fi
+
+# Check if the proprietary nvidia drivers are in use, and if so, load nvidia-settings
+# with the new xserver.
+if [ "echo `lsmod` | grep -o -i "nvidia"" ]
+then
+	NVIDIA="nvidia-settings --load-config-only"
+fi
+
+if [ $XSWITCH ]
+then
+	if ASK "Log out and start a new Xserver?"
+	then
+		sudo /etc/init.d/$DISPLAYMANAGER stop &
+	else
+		EXIT
+	fi
+fi
+
+# Run an xserver
+export DISPLAY="$NEW_DISPLAY"
+gui=1
+$ROOT X :$DISPLAY -ac &>/dev/null &
+
+if [ "$NVIDIA" ]
+then
+	DISPLAY=:"$DISPLAY" $NVIDIA
+fi
+
+# Drop permissions
+if [ -a /etc/X11/Xwrapper.config.bak ]
+then
+	sudo mv /etc/X11/Xwrapper.config.bak /etc/X11/Xwrapper.config
+fi
+
+# Store the primary app
+APP=$1
+
+# Execute all secondary apps
+shift
+for i in $@
+do
+	$( DISPLAY=:"$DISPLAY" $i &>/dev/null ) &
+done
+
+# Execute primary app
+$( DISPLAY=:"$DISPLAY" $APP &>/dev/null && wait ) || DIE "Xserver $DISPLAY terminated."
+
+# Let users know what the haps be
+if [ $XSWITCH ]
+then
+	sleep 2
+	DISPLAY=:"$DISPLAY" zenity --question --text "Return to desktop?"
+	if [ "$?" ]
+	then
+		sudo /etc/init.d/$DISPLAYMANAGER restart || WARN "A display manager could not be started!/n/nPress \"Control + Alt + F1\" and enter the command \"sudo /etc/init.d/$DISPLAYMANAGER restart\" to retun to your desktop."
+	else
+		EXIT
+	fi
+else
+	sleep 2
+	DISPLAY=:"$DISPLAY" zenity --info --text "Press \"Control + Alt + Backspace\" to return to your desktop" &>/dev/null || echo ""
+fi
+
+# Make sure nohup logs are cleaned up
+if [ $XSWITCH ] || [ $WINDOW_MANAGER ]
+then
+	EXIT
+fi
