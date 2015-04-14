@@ -111,4 +111,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-[[ -f "/home/notjimcarrey/.local/share/Steam/setup_debian_environment.sh" ]] && source "/home/notjimcarrey/.local/share/Steam/setup_debian_environment.sh"
