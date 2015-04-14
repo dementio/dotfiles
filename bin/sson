@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# sson - activate screen and power mgmt
-xscreensaver > /dev/null 2>&1 &
-xset s 100
-xset +dpms
