@@ -1,0 +1,302 @@
+############
+# Personal #
+############
+OPTIONS=name:Jim,gender:female,align:random,role=random,race:random
+OPTIONS=dogname:Spot,catname:Patch,fruit:Mango
+OPTIONS=horsename:Lippy,wolfname:Akela
+#,ratname:Hammy
+OPTIONS=crocodilename:Wally,monkeyname:George
+OPTIONS=player_selection:prompts,checkpoint
+
+
+############
+# Graphics #
+############
+OPTIONS=IBMgraphics
+OPTIONS=map_mode:ascii10x18
+#OPTIONS=showweight
+OPTIONS=showbuc,!sparkle,!splash_screen
+OPTIONS=boulder:0,lit_corridor,hilite_pet
+OPTIONS=!newcolors,tombstone,runmode:walk
+OPTIONS=color,perm_invent
+OPTIONS=scroll_margin:15,scroll_amount:1
+# turn ghosts and shades into 'X' - great with telepathy for bones detection
+OPTIONS=monsters:abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@X'&;:~]
+#OPTIONS=objects:m)[="(%!?+/$*````
+#OPTIONS=traps:^^^^^^^^^^^^^^^^^"^^^^
+#OPTIONS=dungeon:032 179 196 218 191 192 217 197 193 194 180 195 250 254 254 043 043 240 241 250 176 177 060 062 060 062 095 124 092 035 244 247 250 247 250 250 035 035 032 035 247
+#OPTIONS=dungeon:" |--------||.-|++##.##<><>_|\\#{~~~..## #~"
+#OPTIONS=dungeon:" |--------||.-|}}##.##<><>_9\\}{}.}..## 6}"
+#OPTIONS=dungeon:\ │─┌┐└┘┼┴┬┤├·■■++≡±·░▒<><>_|\#⌠≋·≋··## #≋
+#OPTIONS=dungeon: |--------||.-|]]}}.##<><>_\\\\{{~.}..}} #}
+#OPTIONS=font_map:Arial
+#OPTIONS=dungeon:\█\│\―\┌\┐\└\┘\┼\┴\┬\┤\├\¦\□\□\■\■\≡\♣\░\▓\▒\<\>\˄\˅\۩\∩\Ʊ\Ɵ\ƕ\≈\₪\ʬ\▪\▪\║\═\ \ \ׁ\≈
+#OPTIONS=effects:|-\\/*!)(0#@*/-\\||\\-//-\\|\ |\\-/
+
+
+###############
+# Preferences #
+###############
+OPTIONS=autodig,autoquiver,pushweapon,sortloot:f
+OPTIONS=pickup_burden:unencumbered,fixinv,autounlock
+OPTIONS=autopickup,pickup_types:$"=/!?+
+OPTIONS=packorder:"[=)%!?+/(*0_`
+OPTIONS=scores:10 top/3 around/own,pilesize:5
+OPTIONS=!legacy,mouse,!cmdassist,help
+OPTIONS=disclose:yiyayvygyc,sortpack
+OPTIONS=paranoid_hit,paranoid_quit,paranoid_remove,prayconfirm
+OPTIONS:!news,showborn,showscore,bones
+OPTIONS=suppress_alert=3.4.3,sound,verbose
+OPTIONS=time,showexp,number_pad:2,toptenwin
+#OPTIONS=hilite_hidden_stairs,hilite_obj_piles
+#OPTIONS=hp_notify,hp_notify_fmt:[HP%c%a=%H]
+
+
+###############
+# Messagetype #
+###############
+# displacing pets. hide the message
+MSGTYPE=hide "You displaced *"
+# items on floor. don't repeat the message
+MSGTYPE=norep "You see here a *"
+MSGTYPE=norep "You see here an *"
+# delayed instadeaths. always prompt for -more-
+MSGTYPE=stop "You are slowing down."
+MSGTYPE=stop "You find it hard to breathe."
+MSGTYPE=stop "You are turning a little *"
+
+
+##########
+# Curses #
+##########
+#OPTIONS=windowtype:curses,hpmon
+OPTIONS=menustyle:partial,!popup_dialog,hitpointbar
+OPTIONS=guicolor,msg_window:r
+#OPTIONS=align_message:bottom,align_status:right
+OPTIONS=term_cols:110,term_rows:32,show_dgn_name
+OPTIONS=windowborders:3,msghistory:50,cursesgraphics
+#OPTIONS=petattr:BIL
+OPTIONS=windowcolors:menu white/black message trueblack/#EEEEEE status trueblack/#EEEEEE text white/black
+
+
+##########################
+# Auto Pickup Exceptions #
+##########################
+# autopickup items that have [,] in their name
+autopickup_exception="<* named *[,]*"
+autopickup_exception="<* called *[,]*"
+
+# never autopickup items that have [!,] in their name
+autopickup_exception="* named *[!,]*"
+autopickup_exception="* called *[!,]*"
+
+# crappy items
+autopickup_exception="* named* empty*"
+autopickup_exception="* named* crap*"
+autopickup_exception="* named* junk*"
+autopickup_exception="* named* worthless*"
+autopickup_exception="* named* Garin*"
+
+# we might want to autopickup food, but never corpses
+autopickup_exception="* corpse*"
+
+# really good items I don't normally autopickup
+autopickup_exception="<*magic marker*"
+autopickup_exception="<*magic lamp*"
+autopickup_exception="<*lamp called magic"
+autopickup_exception="<*silver bell*"
+autopickup_exception="<*Bell of Opening*"
+autopickup_exception="<*candelabrum*"
+autopickup_exception="<*Candelabrum*"
+autopickup_exception="<*Book of the Dead*"
+autopickup_exception="<*papyrus spellbook*"
+
+#########
+# Fonts #
+#########
+OPTIONS=font_message:DejaVu Condensed,font_size_message:12,align_message:top
+OPTIONS=font_menu:DejaVu Condensed,font_size_menu:12
+OPTIONS=font_text:DejaVu Mono,font_size_text:13
+OPTIONS=font_status:DejaVu Mono,font_size_status:13
+
+##############
+# MenuColors #
+##############
+OPTIONS=menucolors
+# B/U/C
+#MENUCOLOR="^[a-zA-Z$] - "=white #may want to enable this if regularly playing priest.. (priests don't see the 'uncursed')
+MENUCOLOR=" !C"=white
+MENUCOLOR=" !B"=white
+MENUCOLOR=" !UC"=white
+MENUCOLOR=" uncursed| UC?($| )"=white
+MENUCOLOR=" \([-0-9]+:[-0-9]+\)"=white #nethack doesn't display "uncursed" if charges are known
+MENUCOLOR=" [+-][0-9]"=white
+MENUCOLOR=" blessed| B($| )"=cyan
+MENUCOLOR=" cursed| C($| )"=red
+
+# WATER SPORTS
+MENUCOLOR=" holy water"=cyan&bold
+MENUCOLOR=" blessed clear potion"=cyan&bold
+MENUCOLOR=" blessed potions? called water"=cyan&bold
+MENUCOLOR=" clear potions? named (holy|blessed|B)($| )"=cyan&bold
+MENUCOLOR=" potions? of water named (holy|blessed|B)($| )"=cyan&bold
+MENUCOLOR=" potions? called water named (holy|blessed|B)($| )"=cyan&bold
+MENUCOLOR=" unholy water"=orange
+MENUCOLOR=" cursed clear potion"=orange
+MENUCOLOR=" cursed potions? called water"=orange
+MENUCOLOR=" potions? called water named (unholy|cursed|C)($| )"=orange
+
+# FOOD CONDUCTS
+# Vegan
+MENUCOLOR="(food |cram |K-|C-)ration|gunyoki"=green&bold
+MENUCOLOR="lembas wafer|melon|carrot|tin .* spinach"=green&bold
+MENUCOLOR=" oranges?( named.*)?$"=green&bold # avoid coloring orange DSM
+MENUCOLOR=" pears?( named.*)?$"=green&bold # avoid coloring pearl rings
+MENUCOLOR=" apple|banana|kelp|eucalyptus|garlic|wolfsbane"=green&bold
+MENUCOLOR=" slime mold| Mango"=green&bold  ## YOUR FRUIT HERE
+MENUCOLOR="(tin of )?(gelatinous cube|acid blob|quivering blob)( corpse)?"=green&bold
+MENUCOLOR="(tin of )?(blue|spotted|ochre) jelly( corpse)?"=green&bold
+MENUCOLOR="(tin of )?lichen|shrieker|violet fungus|(brown|yellow|green|red) mold( corpse)?"=green&bold
+# Vegetarian
+MENUCOLOR="egg|pancake|fortune cookie|candy bar|royal jelly|cream pie|candle"=green
+MENUCOLOR="(tin of )?brown pudding|gray ooze( corpse)?"=green
+
+# GOODIES
+MENUCOLOR=" bag .* holding"=magenta
+MENUCOLOR=" luck(stone)?($| )"=magenta
+MENUCOLOR=" wand .* wish(ing)?($| )"= magenta
+MENUCOLOR=" magic marker"=magenta
+MENUCOLOR=" magic lamp|lamp .* magic"=magenta
+MENUCOLOR=" unicorn horn[^[]*$"=magenta #this doesn't color the #enhance unicorn horn skill
+MENUCOLOR=" tinning kit"=magenta
+MENUCOLOR=" ring .* regen(eration)?($| )"=magenta
+MENUCOLOR=" ring .* conflict"=magentaMENUCOLOR=" ring .* (FA|free action)($| )"=magenta
+MENUCOLOR=" ring .* (TC|teleport control)($| )"=magenta
+MENUCOLOR=" ring .* lev(itation)?($| )"=magenta
+MENUCOLOR=" amulet .* (life ?saving|LS)($| )"=magenta
+MENUCOLOR=" amulet .* ref(lection)?($| )"=magenta
+MENUCOLOR=" c(o|hi)ckatrice (corpse|egg)"=magenta
+MENUCOLOR=" egg .* cockatrice"=magenta
+MENUCOLOR=" stethoscope"=magenta
+
+# Instruments
+MENUCOLOR="tooled horn|fire horn|frost horn|horn .* (tooled|fire|frost)"=magenta
+MENUCOLOR=" harp"=magenta
+MENUCOLOR=" bugle"=magenta
+MENUCOLOR=" flute"=magenta
+
+# ARTIFACTS
+# Unaligned
+MENUCOLOR=" (Dragonbane|Fire Brand|Frost Brand|Ogresmasher|Trollsbane|Werebane)"=lightgreen
+# Lawful normal, quest
+MENUCOLOR=" (Demonbane|Excalibur|Grayswandir|Snickersnee|Sunsword)"=lightgreen
+MENUCOLOR=" (Orb of Detection|Sceptre of Might|Magic Mirror of Merlin|Mitre of Holiness|Tsurugi of Muramasa)"=lightgreen
+# Neutral normal, quest
+MENUCOLOR=" (Cleaver|Giantslayer|Magicbane|Mjollnir|Vorpal Blade)"=lightgreen
+MENUCOLOR=" (Heart of Ahriman|Staff of Aesculapius|Eyes of the Overworld|Platinum Yendorian Express Card|Orb of Fate|Eye of the Aethiopica)"=lightgreen
+# Chaotic normal, quest
+MENUCOLOR=" (Grimtooth|Orcrist|Sting|Stormbringer)"=lightgreen
+MENUCOLOR=" (Longbow of Diana|Master Key of Thievery)"=lightgreen
+# Invocation itemsMENUCOLOR=" (Bell of Opening|silver bell|Candelabrum of Invocation|candelabrum|Book of the Dead|papyrus spellbook)"=magenta&bold
+# Raison d'etre
+MENUCOLOR=" Amulet of Yendor named"=magenta&bold&underline
+
+# CURSED GOODIES
+MENUCOLOR=" cursed.* bag .* holding"=red&bold
+MENUCOLOR=" cursed.* luck(stone)?($| )"=red&bold
+MENUCOLOR=" cursed.* unicorn horn"=red&bold
+MENUCOLOR=" cursed.* (Bell of Opening|silver bell|Candelabrum of Invocation|candelabrum|Book of the Dead|papyrus spellbook)"=red&bold
+
+# BAD STUFF
+MENUCOLOR=" load(stone)?($| )"=red&underline
+
+# WATCH OUT, BAG OF HOLDING!
+MENUCOLOR=" bag .* tricks"=blue&underline
+MENUCOLOR=" wand .*[^!]canc"=blue&underline
+MENUCOLOR=" wand .* vanish"=blue
+
+# SHINY THINGS
+MENUCOLOR=" gold piece"=yellow
+MENUCOLOR=" valuable"=brown
+MENUCOLOR=" gems? .* hard"=yellow
+# Soft gems
+MENUCOLOR=" \([0-9]+\|an?\|gems? .*\) \(uncursed \|cursed \|blessed \)?\(dilithium\|opal\|garnet\|jasper\|agate\|jet\|obsidian\|jade\|citrine\|chrysoberyl\|amber\|amethyst\|fluorite\|turquoise\)\(e?s\)?\( stones?\| gems?\| crystals?\)?\( named .*\)?$"=brown
+#hard gems
+MENUCOLOR=" \([0-9]+\|an?\|gems?.*\) \(uncursed \|cursed \|blessed \)?\(diamond\|rub\(y\|ies\)\|jacinth\|sapphire\|black opal\|emerald\|topaz\|aquamarine\)\(e?s\)?\( stones?\| gems?\)?\( named .*\)?$"=yellow
+
+# SPELL FAILURE RATES
+MENUCOLOR=" 0%"=white
+MENUCOLOR=" [1-9]%"=cyan
+MENUCOLOR=" [12][0-9]%"=cyan
+MENUCOLOR=" [3-6][0-9]%"=yellow
+MENUCOLOR=" 7[0-5]%"=yellow
+MENUCOLOR=" 7[6-9]%"=orange
+MENUCOLOR=" 8[0-9]%"=orange
+MENUCOLOR=" 9[0-9]%"=red
+MENUCOLOR=" 100%"=red
+
+# FORGOTTEN SPELL
+MENUCOLOR="[a-zA-Z] - [a-zA-Z ]+ [0-9]\*   [a-z]+ +[0-9]+%"=magenta
+
+# ENHANCE
+MENUCOLOR="^ +[a-z -]+ +\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]$"=none           # normal
+MENUCOLOR="^ *[a-z] - +[a-z -]+ +\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]$"=white # ready to enhance
+MENUCOLOR="^ +\* +[a-z -]+ +\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]$"=white      # enhanceable if more skill slots
+MENUCOLOR="^ +# +[a-z -]+ +\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]$"=none        # enhanceable if more potential
+
+# FORCE COLORS
+# Some of these are subject to change !
+MENUCOLOR="\{R\}"=red
+MENUCOLOR="\{B\}"=blue
+MENUCOLOR="\{C\}"=cyan
+MENUCOLOR="\{G\}"=green
+MENUCOLOR="\{Y\}"=yellow
+MENUCOLOR="\{[MP]\}"=magenta
+MENUCOLOR="\{O\}"=orange
+MENUCOLOR="\{W\}"=white
+MENUCOLOR="\{L\}"=black
+MENUCOLOR="\{y\}"=gray
+MENUCOLOR="\{g\}"=lightgreen
+MENUCOLOR="\{b\}"=lightblue
+MENUCOLOR="\{[mp]\}"=lightmagenta
+MENUCOLOR="\{c\}"=lightcyan
+MENUCOLOR="\{N\}"=none
+MENUCOLOR="\{X\}"=bold
+MENUCOLOR="\{x\}"=dim
+MENUCOLOR="\{U\}"=underline
+MENUCOLOR="\{I\}"=inverse
+MENUCOLOR="\{K\}"=blink
+
+# LOOT/APPLY CONTAINER
+MENUCOLOR=" is empty. Do what?"=none
+MENUCOLOR="Put something into .*"=none
+MENUCOLOR="Take something out of .*"=none
+
+
+#################
+# Status Colors #
+#################
+OPTIONS=statuscolors
+STATUSCOLOR=hp%100=green,hp%66=yellow,hp%50=orange
+STATUSCOLOR=hp%33=red&bold,hp%15:red&inverse,hp%0:red&inverse&blink
+STATUSCOLOR=pw%100=green,pw%66=yellow,pw%50:orange,pw%33=red&bold
+STATUSCOLOR=wt%100=green,wt%150=yellow,wt%200=orange,wt%250=red&bold
+STATUSCOLOR=wt%300=red&inverse,wt%1000=red&inverse&blink
+STATUSCOLOR=burdened:yellow,stressed:orange,strained:red&bold
+STATUSCOLOR=overtaxed:red&inverse,overloaded:red&inverse&blink
+STATUSCOLOR=satiated:yellow,hungry:orange,weak:red&bold
+STATUSCOLOR=fainting:red&inverse,fainted:red&inverse&blink
+STATUSCOLOR=hallu:yellow,conf:orange,stun:red&bold
+STATUSCOLOR=ill:red&inverse,foodpois:red&inverse,slime:red&inverse
+STATUSCOLOR=held:red&inverse,blind:red&inverse
+
+
+####################
+# Folder Locations #
+####################
+LEVELDIR=%USERNAME%\Desktop\UNN\levels
+SAVEDIR=%USERNAME%\Desktop\UNN\saves
+BONESDIR=%USERNAME%\Desktop\UNN\bones
+LOCKDIR=%USERNAME%\Desktop\UNN\levels
+TROUBLEDIR=%USERNAME%\Desktop\UNN\trouble
+OPTIONS=dumpfile:dump_%s.txt
