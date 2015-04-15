@@ -1,4 +1,4 @@
-apt-get install vim axel git gpm command-not-found elinks build-essential ctags python-pip python-dev colorgcc colormake colordiff colortail ccze flex byacc libncurses5-dev libncursesw5-dev
+apt-get install vim axel git gpm command-not-found elinks build-essential ctags python-pip python-dev colorgcc colormake colordiff colortail ccze flex byacc libncurses5-dev libncursesw5-dev irssi irssi-dev irssi-scripts
 pip install glances
 git clone https://github.com/amix/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
