@@ -1,7 +1,7 @@
 mv non-free /etc/apt/sources.list.d/
 apt-get update
 apt-get -y dist-upgrade
-apt-get install -y vim axel git gpm command-not-found elinks build-essential ctags python-pip python-dev colorgcc colormake \
+apt-get -y install vim axel git gpm command-not-found elinks build-essential ctags python-pip python-dev colorgcc colormake \
 colordiff colortail ccze flex byacc libncurses5-dev libncursesw5-dev irssi irssi-dev irssi-scripts lshw pastebinit deborphan \
 p7zip-full ntpdate beep firmware-linux-nonfree
 echo 'C:12345:wait:/usr/bin/tail -n30 -f /var/log/messages | /usr/bin/ccze > /dev/tty12' >> /etc/inittab
