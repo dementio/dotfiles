@@ -12,5 +12,6 @@ update-command-not-found
 cd unnethack
 ./configure --enable-curses-graphics
 make
+make install
 cd
 beep
