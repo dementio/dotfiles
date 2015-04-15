@@ -16,4 +16,5 @@ cd unnethack
 make
 make install
 cd
+mv .nethackrc /usr/local/share/unnethack/unnethackrc.default
 beep
