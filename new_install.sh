@@ -1,4 +1,4 @@
-mv non-free /etc/apt/sources.list.d/
+mv non-free.list /etc/apt/sources.list.d/
 apt-get update
 apt-get -y dist-upgrade
 apt-get -y install vim axel git gpm command-not-found elinks build-essential ctags python-pip python-dev colorgcc colormake \
