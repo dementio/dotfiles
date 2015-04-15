@@ -7,10 +7,10 @@ p7zip-full ntpdate beep firmware-linux-nonfree
 echo 'C:12345:wait:/usr/bin/tail -n30 -f /var/log/messages | /usr/bin/ccze > /dev/tty12' >> /etc/inittab
 echo 'C:12345:wait:/usr/local/bin/glances > /dev/tty11' >> /etc/inittab
 pip install glances
-git clone https://github.com/amix/vimrc.git .vim_runtime
+#git clone https://github.com/amix/vimrc.git .vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
 update-command-not-found
-git clone http://git.code.sf.net/p/unnethack/git unnethack
+#git clone http://git.code.sf.net/p/unnethack/git unnethack
 cd unnethack
 ./configure --enable-curses-graphics
 make
