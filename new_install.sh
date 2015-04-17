@@ -23,7 +23,7 @@ p7zip-full ntpdate beep firmware-linux-nonfree screen setserial
 
 # Configure tty11 & tty12
 sudo echo 'C:12345:wait:/usr/bin/tail -n30 -f /var/log/messages | /usr/bin/ccze > /dev/tty12' >> /etc/inittab
-sudo echo 'C:12345:wait:/usr/local/bin/glances > /dev/tty11' >> /etc/inittab
+sudo echo "C:12345:wait:setsid sh -c 'exec glances <> /dev/tty11 >&0 2>&1'" >> /etc/inittab
 
 #Install Glances
 sudo pip install glances
