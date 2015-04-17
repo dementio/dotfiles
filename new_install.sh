@@ -28,4 +28,3 @@ make
 sudo make install
 sudo ln -fs ~/dotfiles/.nethackrc /usr/local/share/unnethack/unnethackrc.default
 beep
-fi
