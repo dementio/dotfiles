@@ -44,4 +44,5 @@ sudo curl https://yt-dl.org/latest/youtube-dl -o /usr/local/bin/youtube-dl
 sudo chmod a+x /usr/local/bin/youtube-dl
 
 sudo update-command-not-found
+echo "Change .irssi/config:19"
 beep
