@@ -227,32 +227,25 @@ settings = {
     timestamp_format = "%d.%H%M%S";
   };
   "fe-text" = { scrollback_time = "48h"; actlist_sort = "refnum"; };
-  "fe-common/core" = { autolog = "yes"; theme = "initrd"; };
+  "fe-common/core" = {
+    autolog = "yes";
+    theme = "initrd";
+    beep_when_window_active = "yes";
+    beep_when_away = "yes";
+    beep_msg_level = "MSGS NOTICES DCC DCCMSGS HILIGHT";
+    bell_beeps = "yes";
+  };
   "perl/core/scripts" = {
     awl_block = "-14";
     awl_display_key = "$Q%K|$N%n $N$C$S";
     awl_display_key_active = "$Q%K|$N%n $H%U$C%n$S";
     awl_display_nokey = "[$N]$H$C$S";
+    crapbuster_levels = "JOINS PARTS QUITS NICKS CLIENTCRAP CRAP MODE TOPICS KICKS";
   };
 };
 
 hilights = (
   { text = "NotJimCarrey"; nick = "no"; word = "no"; },
   { text = "notjimcarrey"; nick = "no"; word = "no"; }
-);
-ignores = (
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#debian" ); },
-  { 
-    level = "JOINS PARTS QUITS NICKS";
-    channels = ( "#openpandora" );
-  },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#unnethack" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#kali-linux" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#xfce" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#mwsf" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#calibre" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#xbmc" ); },
-  { level = "JOINS PARTS QUITS MODES"; channels = ( "#hexbright" ); },
-  { level = "JOINS PARTS QUITS MODES"; }
 );
 logs = { };
