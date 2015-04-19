@@ -4,6 +4,21 @@
 #   exit 1
 #fi
 
+# Detect distro and set to $os
+fn_distro(){
+arch=$(uname -m)
+kernel=$(uname -r)
+if [ -f /etc/lsb-release ]; then
+        os=$(lsb_release -s -d)
+elif [ -f /etc/debian_version ]; then
+        os="Debian $(cat /etc/debian_version)"
+elif [ -f /etc/redhat-release ]; then
+        os=`cat /etc/redhat-release`
+else
+        os="$(uname -s) $(uname -r)"
+fi
+}
+
 # Setup environment
 ln -fs ~/dotfiles/.bashrc ~/.bashrc
 ln -fs ~/dotfiles/.profile ~/.profile
@@ -13,8 +28,14 @@ ln -s ~/dotfiles/bin ~/bin
 ln -s ~/dotfiles/.fonts ~/.fonts
 fc-cache -fv
 
+# Add nonfree if needed
+if $os = "Debian"; then
+  if ! grep -q non-free /etc/apt/sources.list; then
+    sudo ln -s /etc/apt/sources.list.d/non-free.list ~/dotfiles/non-free.list
+  fi
+fi
+
 # Install common utils
-sudo ln -s /etc/apt/sources.list.d/non-free.list ~/dotfiles/non-free.list
 sudo apt-get update
 sudo apt-get -y dist-upgrade
 sudo apt-get -y install vim axel gpm command-not-found elinks build-essential ctags python-pip python-dev colorgcc colormake \
