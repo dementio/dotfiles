@@ -23,6 +23,9 @@ fi
 ln -fs ~/dotfiles/.bashrc ~/.bashrc
 ln -fs ~/dotfiles/.profile ~/.profile
 source ~/.profile
+ln -s ~/dotfiles/.screen ~/.screen
+ln -s ~/dotfiles/.screenrc ~/.screenrc
+ln -s ~/dotfiles/.bash_logout ~/.bash_logout
 ln -s ~/dotfiles/.irssi ~/.irssi
 ln -s ~/dotfiles/bin ~/bin
 ln -s ~/dotfiles/.fonts ~/.fonts
