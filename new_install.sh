@@ -21,14 +21,15 @@ fi
 
 # Setup environment
 ln -fs ~/dotfiles/.bashrc ~/.bashrc
+ln -fs ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -fs ~/dotfiles/.profile ~/.profile
+ln -fs ~/dotfiles/.screen ~/.screen
+ln -fs ~/dotfiles/.screenrc ~/.screenrc
+ln -fs ~/dotfiles/.bash_logout ~/.bash_logout
+ln -fs ~/dotfiles/.irssi ~/.irssi
+ln -fs ~/dotfiles/bin ~/bin
+ln -fs ~/dotfiles/.fonts ~/.fonts
 source ~/.profile
-ln -s ~/dotfiles/.screen ~/.screen
-ln -s ~/dotfiles/.screenrc ~/.screenrc
-ln -s ~/dotfiles/.bash_logout ~/.bash_logout
-ln -s ~/dotfiles/.irssi ~/.irssi
-ln -s ~/dotfiles/bin ~/bin
-ln -s ~/dotfiles/.fonts ~/.fonts
 fc-cache -fv
 
 # Add nonfree if needed
@@ -43,7 +44,7 @@ sudo apt-get update
 sudo apt-get -y dist-upgrade
 sudo apt-get -y install vim axel gpm command-not-found elinks build-essential ctags python-pip python-dev colorgcc colormake \
 colordiff colortail ccze flex byacc libncurses5-dev libncursesw5-dev irssi irssi-dev irssi-scripts lshw pastebinit deborphan \
-p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqlite3-dev
+p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqlite3-dev tmux
 
 # Configure tty11 & tty12
 sudo echo 'C:12345:wait:/usr/bin/tail -n30 -f /var/log/messages | /usr/bin/ccze > /dev/tty12' >> /etc/inittab
@@ -58,7 +59,8 @@ sh ~/.vim_runtime/install_awesome_vimrc.sh
 
 # Build & install UnNetHack
 cd ~/dotfiles/unnethack
-./configure --enable-curses-graphics
+make clean
+./configure --enable-curses-graphics --enable-score-on-botl
 make
 sudo make install
 sudo ln -fs ~/dotfiles/.nethackrc /usr/local/share/unnethack/unnethackrc.default

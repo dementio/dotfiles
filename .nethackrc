@@ -20,7 +20,7 @@ OPTIONS=pickup_types:$"=/!?+
 OPTIONS=packorder:"[=)%!?+/(*0_`
 OPTIONS=boulder:0,!sparkle
 OPTIONS=showbuc,hilite_pet,color,lit_corridor
-OPTIONS=msg_window:reversed,showscore,time,showscore,show_dgn_name
+OPTIONS=msg_window:reversed,time,showscore,show_dgn_name
 OPTIONS=showexp,verbose,toptenwin
 OPTIONS=scores:10 top/2 around/own
 OPTIONS=disclose:yiyayvygyc
