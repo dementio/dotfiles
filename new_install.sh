@@ -12,7 +12,7 @@ kernel=$(uname -r)
 if [ -f /etc/lsb-release ]; then
         os=$(lsb_release -s -d)
 elif [ -f /etc/debian_version ]; then
-        os="Debian $(cat /etc/debian_version)"
+        os="Debian"
 elif [ -f /etc/redhat-release ]; then
         os=`cat /etc/redhat-release`
 else
@@ -34,11 +34,11 @@ source ~/.profile
 fc-cache -fv
 
 # Add nonfree if needed
-if $os = "Debian"; then
-  if ! grep -q non-free /etc/apt/sources.list; then
-    sudo ln -s /etc/apt/sources.list.d/non-free.list ~/dotfiles/non-free.list
-  fi
-fi
+#if $os = "Debian"; then
+#  if ! grep -q non-free /etc/apt/sources.list; then
+    sudo ln -fs ~/dotfiles/non-free.list /etc/apt/sources.list.d/non-free.list
+#  fi
+#fi
 
 # Install common utils
 sudo apt-get update
