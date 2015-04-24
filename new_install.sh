@@ -11,7 +11,7 @@ kernel=$(uname -r)
 if [ -f /etc/lsb-release ]; then
         os=$(lsb_release -s -d)
 elif [ -f /etc/debian_version ]; then
-        os="Debian $(cat /etc/debian_version)"
+        os="Debian"
 elif [ -f /etc/redhat-release ]; then
         os=`cat /etc/redhat-release`
 else
