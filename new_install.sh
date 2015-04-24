@@ -35,7 +35,7 @@ fc-cache -fv
 # Add nonfree if needed
 #if $os = "Debian"; then
 #  if ! grep -q non-free /etc/apt/sources.list; then
-    sudo cp -u ~/dotfiles/non-free.list /etc/apt/sources.list.d/non-free.list
+    sudo ln -fs ~/dotfiles/non-free.list /etc/apt/sources.list.d/non-free.list
 #  fi
 #fi
 
