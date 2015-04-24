@@ -4,20 +4,80 @@
 #   exit 1
 #fi
 
-# Detect distro and set to $os
-# apt-get for debian|rpm for redhat|yum for fedora|pacman for arch|emerge for gentoo
-fn_distro(){
-arch=$(uname -m)
-kernel=$(uname -r)
-if [ -f /etc/lsb-release ]; then
-        os=$(lsb_release -s -d)
-elif [ -f /etc/debian_version ]; then
-        os="Debian"
-elif [ -f /etc/redhat-release ]; then
-        os=`cat /etc/redhat-release`
-else
-        os="$(uname -s) $(uname -r)"
-fi
+set -u      # exit if there is any unbound variable
+
+_POPT=""    # primary   operation
+_SOPT=""    # secondary operation
+_TOPT=""    # options for operations
+_PKG=""     # packages and extra parameters for apt-get
+_VERBOSE="" # verbose mode
+_FORCE=""   # force yes
+_OSTYPE=""  # type of package manager (Arch pacman, Debian apt, ...)
+
+_error() {
+  echo >&2 ":: $*"
+}
+
+###
+### Helpers
+###
+
+_os_is() {
+  [[ "$_OSTYPE" = "$*" ]]
+}
+
+_exec_() {
+  local _type="$1"
+  shift
+  if _os_is $_type; then
+    [[ -z "$_VERBOSE" ]] || _error "Going to execute: $* $_VERBOSE $_FORCE"
+    eval "$* $_VERBOSE $_FORCE"
+  fi
+}
+
+# Detect OS & package type from /etc/issue
+_found_arch() {
+  local _ostype="$1"
+  shift
+  grep -qis "$*" /etc/issue && _OSTYPE="$_ostype"
+}
+
+# Detect package type
+_OSTYPE_detect() {
+  _found_arch PACMAN "Arch Linux" && return
+  _found_arch DPKG   "Debian GNU/Linux" && return
+  _found_arch DPKG   "Ubuntu" && return
+  _found_arch YUM    "CentOS" && return
+  _found_arch YUM    "Red Hat" && return
+  _found_arch YUM    "Fedora" && return
+  _found_arch ZYPPER "SUSE" && return
+
+  [[ -z "$_OSTYPE" ]] || return
+
+  # See also https://github.com/icy/pacapt/pull/22
+  # Please not that $OSTYPE (which is `linux-gnu` on Linux system)
+  # is not our $_OSTYPE. The choice is not very good because
+  # a typo can just break the logic of the program.
+  if [[ "$OSTYPE" != "darwin"* ]]; then
+    _error "Can't detect OS type from /etc/issue. Running fallback method."
+  fi
+  if [[ -x "/usr/bin/pacman" ]]; then
+    # This is to prevent a loop when this script is installed on
+    # non-standard system
+    grep -q "$FUNCNAME" '/usr/bin/pacman' >/dev/null 2>&1
+    [[ $? -ge 1 ]] && _OSTYPE="PACMAN" && return
+  fi
+  [[ -x "/usr/bin/apt-get" ]]          && _OSTYPE="DPKG" && return
+  [[ -x "/usr/bin/yum" ]]              && _OSTYPE="YUM" && return
+  [[ -x "/opt/local/bin/port" ]]       && _OSTYPE="MACPORTS" && return
+  command -v brew >/dev/null           && _OSTYPE="HOMEBREW" && return
+  [[ -x "/usr/bin/emerge" ]]           && _OSTYPE="PORTAGE" && return
+  [[ -x "/usr/bin/zypper" ]]           && _OSTYPE="ZYPPER" && return
+  if [[ -z "$_OSTYPE" ]]; then
+    _error "No supported package manager installed on system"
+    _error "(supported: apt, homebrew, pacman, portage, yum)"
+    exit 1
+  fi
 }
 
 # Setup environment
