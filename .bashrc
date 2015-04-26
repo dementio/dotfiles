@@ -76,6 +76,11 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
+    alias defi-new='dict -d wn'
+    alias def='dict -d gicde'
+    alias ddef='dict -d foldoc'
+    alias cdef='dict -d vera'
+    alias thes='dict -d moby-thesaurus'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 

@@ -105,7 +105,8 @@ sudo apt-get update
 sudo apt-get -y dist-upgrade
 sudo apt-get -y install vim axel gpm command-not-found elinks build-essential ctags python-pip python-dev colorgcc colormake \
 colordiff colortail ccze flex byacc libncurses5-dev libncursesw5-dev irssi irssi-dev irssi-scripts lshw pastebinit deborphan \
-p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqlite3-dev tmux exfat-fuse
+p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqlite3-dev tmux exfat-fuse dict-devil dict-vers \
+dict-foldoc dict-gcide dict-wn dict-moby-thesaurus
 
 # Configure tty11 & tty12
 sudo echo 'C:12345:wait:/usr/bin/tail -n30 -f /var/log/messages | /usr/bin/ccze > /dev/tty12' >> /etc/inittab
