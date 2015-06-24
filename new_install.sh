@@ -4,6 +4,8 @@
 #   exit 1
 #fi
 
+# Add command switches for 'all' 'environment' etc
+
 set -u      # exit if there is any unbound variable
 
 _POPT=""    # primary   operation
