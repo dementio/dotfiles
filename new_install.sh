@@ -107,15 +107,16 @@ sudo apt-get update
 sudo apt-get -y dist-upgrade
 sudo apt-get -y install vim axel gpm command-not-found elinks build-essential ctags python-pip python-dev colorgcc colormake \
 colordiff colortail ccze flex byacc libncurses5-dev libncursesw5-dev irssi irssi-dev irssi-scripts lshw pastebinit deborphan \
-p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqlite3-dev tmux exfat-fuse dict-devil dict-vers \
-dict-foldoc dict-gcide dict-wn dict-moby-thesaurus curl
+p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqlite3-dev tmux exfat-fuse yara curl\
+dict-devil dict-vers dict-foldoc dict-gcide dict-wn dict-moby-thesaurus
 
 # Configure tty11 & tty12
 sudo echo 'C:12345:wait:/usr/bin/tail -n30 -f /var/log/messages | /usr/bin/ccze > /dev/tty12' >> /etc/inittab
 sudo echo "C:12345:wait:/usr/bin/setsid sh -c 'exec /usr/local/bin/glances <> /dev/tty11 >&0 2>&1'" >> /etc/inittab
 
-#Install Glances
+# Pip installs
 sudo pip install glances
+sudo pip install speedtest-cli
 
 # Install vimrc
 ln -s ~/dotfiles/.vim_runtime ~/.vim_runtime
