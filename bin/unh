@@ -1,0 +1,12 @@
+#!/usr/bin/expect
+
+set timeout 20
+spawn telnet eu.un.nethack.nu
+
+expect "=>"
+send "l"
+expect "=>"
+send "notjimcarrey\n"
+expect "=>"
+send "qbyte\n"
+interact
