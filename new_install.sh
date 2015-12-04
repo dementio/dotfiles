@@ -107,8 +107,12 @@ sudo apt-get update
 sudo apt-get -y dist-upgrade
 sudo apt-get -y install vim axel gpm command-not-found elinks build-essential ctags python-pip python-dev colorgcc colormake \
 colordiff colortail ccze expect flex byacc libncurses5-dev libncursesw5-dev irssi irssi-dev irssi-scripts lshw pastebinit deborphan \
-p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqlite3-dev tmux exfat-fuse yara curl \
-dict-devil dict-vera dict-foldoc dict-gcide dict-wn dict-moby-thesaurus
+p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqlite3-dev tmux exfat-fuse yara curl surfraw
+# Uncomment for Kali
+#dict-devil dict-vera dict-foldoc dict-gcide dict-wn dict-moby-thesaurus
+
+# Add sr elvi to path
+surfraw-update-path
 
 # Configure tty11 & tty12
 sudo echo 'C:12345:wait:/usr/bin/tail -n30 -f /var/log/messages | /usr/bin/ccze > /dev/tty12' >> /etc/inittab
