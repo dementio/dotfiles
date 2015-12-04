@@ -112,7 +112,7 @@ p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqli
 #dict-devil dict-vera dict-foldoc dict-gcide dict-wn dict-moby-thesaurus
 
 # Add sr elvi to path
-surfraw-update-path
+surfraw-update-path -add
 
 # Configure tty11 & tty12
 sudo echo 'C:12345:wait:/usr/bin/tail -n30 -f /var/log/messages | /usr/bin/ccze > /dev/tty12' >> /etc/inittab
