@@ -1,0 +1,2 @@
+export LANG="en_US:en"
+tmux -u attach
