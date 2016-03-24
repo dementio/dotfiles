@@ -121,3 +121,7 @@ fi
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+
+export LANG=en_US.utf8
+export LC_ALL=en_US.utf8

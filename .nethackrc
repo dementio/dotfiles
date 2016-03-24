@@ -5,7 +5,8 @@ OPTIONS=name:Jim,gender:female
 #,role:random,race:random,align:random
 OPTIONS=dogname:Spot,catname:Patch,horsename:Silver,fruit:Mango,ratname:Roadkill
 OPTIONS=monkeyname:George,wolfname:Buck,crocodilename:Wally
-OPTIONS=autoquiver,autodig,number_pad:2,!mail,!legacy,sound
+OPTIONS=autoquiver,autodig,!mail,!legacy,sound
+#OPTIONS=number_pad:2
 OPTIONS=pushweapon,checkpoint,msghistory:50,bones
 OPTIONS=autopickup,pickup_thrown,autounlock,autoopen
 OPTIONS=!cmdassist,pickup_burden=U,paranoid_hit,paranoid_quit,paranoid_remove,pilesize:3

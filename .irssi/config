@@ -209,6 +209,11 @@ settings = {
     user_name = "notjimcarrey";
     nick = "NotJimCarrey";
     timestamp_format = "%d.%H%M%S";
+    recode_autodetect_utf8 = "yes";
+    recode_fallback = "UTF-8";
+    recode = "yes";
+    recode_out_default_charset = "UTF-8";
+    recode_transliterate = "yes";
   };
   "fe-text" = { scrollback_time = "48h"; actlist_sort = "refnum"; };
   "fe-common/core" = {
@@ -218,6 +223,7 @@ settings = {
     beep_when_away = "yes";
     beep_msg_level = "MSGS NOTICES DCC DCCMSGS HILIGHT";
     bell_beeps = "yes";
+    term_charset = "UTF-8";
   };
   "perl/core/scripts" = {
     awl_block = "-14";
