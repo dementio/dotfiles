@@ -4,3 +4,6 @@
 [submodule "unnethack"]
 	path = unnethack
 	url = https://github.com/UnNetHack/UnNetHack.git
+[submodule "Bash-Snippets"]
+	path = Bash-Snippets
+	url = https://github.com/alexanderepstein/Bash-Snippets.git
