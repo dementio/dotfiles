@@ -15,14 +15,14 @@ chatnets = {
   };
   FreeNode = {
     type = "IRC";
-    autosendcmd = "/msg nickserv identify NotJimCarrey secret";
+    autosendcmd = "/msg nickserv identify NotJimCarrey qbyte";
   };
   SILC = { type = "SILC"; };
 };
 channels = (
   { name = "#unnethack"; chatnet = "FreeNode"; autojoin = "Yes"; },
-  { name = "#debian"; chatnet = "FreeNode"; autojoin = "Yes"; },
-  { name = "#kali-linux"; chatnet = "FreeNode"; autojoin = "Yes"; }
+  { name = "#nethack"; chatnet = "FreeNode"; autojoin = "Yes"; },
+  { name = "#debian"; chatnet = "FreeNode"; autojoin = "Yes"; }
 );
 aliases = {
   J = "join";

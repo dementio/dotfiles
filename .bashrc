@@ -96,6 +96,9 @@ fi
 alias diff=colordiff
 alias make=colormake
 alias gcc=colorgcc
+alias tail=colortail
+
+alias ducks='du -chsx * | sort -rh | head -11'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -118,10 +121,14 @@ if ! shopt -oq posix; then
 fi
 
 #sh ~/bin/uniload.sh
+export DENO_INSTALL="/home/notjimcarrey/.deno"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 export LANG=en_US.utf8
 export LC_ALL=en_US.utf8
+export EDITOR='vim'
+
+export TASTE_API_KEY="312002-Taste-7OOCOFMQ"

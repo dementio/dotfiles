@@ -1,8 +1,7 @@
 ############
 # PERSONAL #
 ############
-OPTIONS=name:Jim,gender:female
-#,role:random,race:random,align:random
+OPTIONS=name:Jim,gender:female,role:monk,race:random,align:neutral
 OPTIONS=dogname:Spot,catname:Patch,horsename:Silver,fruit:Mango,ratname:Roadkill
 OPTIONS=monkeyname:George,wolfname:Buck,crocodilename:Wally
 OPTIONS=autoquiver,autodig,!mail,!legacy,sound
@@ -31,11 +30,14 @@ OPTIONS=fullscreen
 #################
 # CURSES CONFIG #
 #################
-OPTIONS=cursesgraphics,windowborders:1,!splash_screen
+OPTIONS=cursesgraphics,windowborders:1
+#,!splash_screen
 OPTIONS=windowtype:curses,mouse_support,menustyle:partial
 OPTIONS=align_message:bottom,align_status:right,guicolor
 OPTIONS=term_cols:110,term_rows:32,petattr:BIL,menucolors
 OPTIONS=hitpointbar,hp_notify
+
+OPTIONS=font_size_map=18
 
 #########
 # B/U/C #
