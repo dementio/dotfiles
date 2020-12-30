@@ -92,7 +92,7 @@ ln -fs ~/dotfiles/.bash_logout ~/.bash_logout
 ln -fs ~/dotfiles/.irssi ~/.irssi
 ln -fs ~/dotfiles/bin ~/bin
 ln -fs ~/dotfiles/.fonts ~/.fonts
-mkdir ~/.config/surfraw
+mkdir -p ~/.config/surfraw
 ln -fs ~/dotfiles/surfraw.conf ~/.config/surfraw/conf
 source ~/.profile
 fc-cache -fv
