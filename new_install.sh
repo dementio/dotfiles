@@ -109,7 +109,7 @@ sudo apt-get update
 sudo apt-get -y dist-upgrade
 sudo apt-get -y install vim axel gpm command-not-found elinks build-essential ctags python-pip python-dev colorgcc colormake \
 colordiff colortail ccze expect flex byacc libncurses5-dev libncursesw5-dev irssi irssi-dev irssi-scripts lshw pastebinit deborphan \
-p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqlite3-dev tmux exfat-fuse yara curl surfraw
+p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqlite3-dev tmux exfat-fuse yara curl surfraw rbenv
 # Uncomment for Kali
 #dict-devil dict-vera dict-foldoc dict-gcide dict-wn dict-moby-thesaurus
 
