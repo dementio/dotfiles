@@ -121,8 +121,8 @@ surfraw-update-path -add
 #sudo echo "C:12345:wait:/usr/bin/setsid sh -c 'exec /usr/local/bin/glances <> /dev/tty11 >&0 2>&1'" >> /etc/inittab
 
 # Pip installs
-sudo pip install glances
-sudo pip install speedtest-cli
+sudo pip3 install glances
+sudo pip3 install speedtest-cli
 
 # Install vimrc
 ln -s ~/dotfiles/.vim_runtime ~/.vim_runtime
