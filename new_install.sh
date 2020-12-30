@@ -107,7 +107,7 @@ fc-cache -fv
 # Install common utils
 sudo apt-get update
 sudo apt-get -y dist-upgrade
-sudo apt-get -y install vim axel gpm command-not-found elinks build-essential ctags python3-pip python-dev colorgcc colormake bash-completion\
+sudo apt-get -y install vim axel gpm command-not-found elinks build-essential exuberant-ctags python3-pip python-dev colormake bash-completion\
 colordiff colortail ccze expect flex byacc libncurses5-dev libncursesw5-dev irssi irssi-dev irssi-scripts lshw pastebinit deborphan \
 p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqlite3-dev tmux exfat-fuse yara curl surfraw rbenv fontconfig
 # Uncomment for Kali
