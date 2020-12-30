@@ -117,8 +117,8 @@ p7zip-full ntpdate beep firmware-linux-nonfree screen setserial autoconf libsqli
 surfraw-update-path -add
 
 # Configure tty11 & tty12
-sudo echo 'C:12345:wait:/usr/bin/tail -n30 -f /var/log/messages | /usr/bin/ccze > /dev/tty12' >> /etc/inittab
-sudo echo "C:12345:wait:/usr/bin/setsid sh -c 'exec /usr/local/bin/glances <> /dev/tty11 >&0 2>&1'" >> /etc/inittab
+#sudo echo 'C:12345:wait:/usr/bin/tail -n30 -f /var/log/messages | /usr/bin/ccze > /dev/tty12' >> /etc/inittab
+#sudo echo "C:12345:wait:/usr/bin/setsid sh -c 'exec /usr/local/bin/glances <> /dev/tty11 >&0 2>&1'" >> /etc/inittab
 
 # Pip installs
 sudo pip install glances
