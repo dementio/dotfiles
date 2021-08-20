@@ -15,7 +15,7 @@ chatnets = {
   };
   FreeNode = {
     type = "IRC";
-    autosendcmd = "/msg nickserv identify NotJimCarrey qbyte";
+    autosendcmd = "/msg nickserv identify NotJimCarrey changeme";
   };
   SILC = { type = "SILC"; };
 };
