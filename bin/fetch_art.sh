@@ -14,7 +14,6 @@ RETRY_FILE="retry_downloads.txt"
 RUN_LOG="fetch_run.log"
 # ==========================================
 
-
 # --- WORKER MODE (Internal use for parallel execution) ---
 if [[ "$1" == "--worker" ]]; then
   shift
@@ -26,7 +25,7 @@ if [[ "$1" == "--worker" ]]; then
   WORKER_RETRY_FILE="$6"
   WORKER_RUN_LOG="$7"
 
-raw_album=$(basename -- "$dir")
+  raw_album=$(basename -- "$dir")
   album=$(echo "$raw_album" | sed -E 's/^[0-9]{4} - //')
   artist=$(basename -- "$(dirname -- "$dir")")
   output_file="$MUSIC_DIR/$dir/folder.jpg"
@@ -95,7 +94,7 @@ fi
 # --- MAIN SCRIPT MODE ---
 
 show_help() {
-  echo "Usage: $(basename "$0") [OPTIONS] [MUSIC_DIR] [REPORT_FILE] [TARGET_SIZE] [MIN_SIZE] [MAX_JOBS]"
+  echo "Usage: $(basename -- "$0") [OPTIONS] [MUSIC_DIR] [REPORT_FILE] [TARGET_SIZE] [MIN_SIZE] [MAX_JOBS]"
   echo ""
   echo "Concurrently downloads missing album art with a live progress bar."
   echo ""
