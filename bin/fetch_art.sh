@@ -26,9 +26,9 @@ if [[ "$1" == "--worker" ]]; then
   WORKER_RETRY_FILE="$6"
   WORKER_RUN_LOG="$7"
 
-  raw_album=$(basename "$dir")
+raw_album=$(basename -- "$dir")
   album=$(echo "$raw_album" | sed -E 's/^[0-9]{4} - //')
-  artist=$(basename "$(dirname "$dir")")
+  artist=$(basename -- "$(dirname -- "$dir")")
   output_file="$MUSIC_DIR/$dir/folder.jpg"
   output_file_png="$MUSIC_DIR/$dir/folder.png"
 
