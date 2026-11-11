@@ -1,5 +1,20 @@
 #!/bin/bash
 
+# ==========================================
+#           USER CONFIGURATION
+# ==========================================
+DEFAULT_MUSIC_DIR="/mnt/user/Storage/Music"
+DEFAULT_REPORT_FILE="missing_artwork_report.txt"
+DEFAULT_TARGET_SIZE="1000"
+DEFAULT_MIN_SIZE="500"
+DEFAULT_MAX_JOBS="4"
+
+FAILED_LOG="failed_downloads.log"
+RETRY_FILE="retry_downloads.txt"
+RUN_LOG="fetch_run.log"
+# ==========================================
+
+
 # --- WORKER MODE (Internal use for parallel execution) ---
 if [[ "$1" == "--worker" ]]; then
   shift
@@ -7,9 +22,9 @@ if [[ "$1" == "--worker" ]]; then
   MUSIC_DIR="$2"
   TARGET_SIZE="$3"
   MIN_SIZE="$4"
-  FAILED_LOG="$5"
-  RETRY_FILE="$6"
-  RUN_LOG="$7"
+  WORKER_FAILED_LOG="$5"
+  WORKER_RETRY_FILE="$6"
+  WORKER_RUN_LOG="$7"
 
   raw_album=$(basename "$dir")
   album=$(echo "$raw_album" | sed -E 's/^[0-9]{4} - //')
@@ -19,7 +34,7 @@ if [[ "$1" == "--worker" ]]; then
 
   log_msg() {
     flock -x 201
-    echo "$1" >> "$RUN_LOG"
+    echo "$1" >> "$WORKER_RUN_LOG"
   } 201>lock.run
 
   # Safety check: Skip if artwork already exists
@@ -54,8 +69,8 @@ if [[ "$1" == "--worker" ]]; then
     if ! validate_img "$output_file"; then
       {
         flock -x 200
-        echo "$dir - Failed both sacad and glyrc attempts" >> "$FAILED_LOG"
-        echo "$dir" >> "$RETRY_FILE"
+        echo "$dir - Failed both sacad and glyrc attempts" >> "$WORKER_FAILED_LOG"
+        echo "$dir" >> "$WORKER_RETRY_FILE"
       } 200>lock.ex
       log_msg "[Failed] $artist - $album"
       echo "." # Output for pv to count
@@ -109,16 +124,14 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+# Map the positional arguments to the defaults set at the top of the script
 set -- "${POSITIONAL_ARGS[@]}"
 
-MUSIC_DIR="${1:-/mnt/user/Storage/Music}"
-REPORT_FILE="${2:-missing_artwork_report.txt}"
-TARGET_SIZE="${3:-1000}"
-MIN_SIZE="${4:-500}"
-MAX_JOBS="${5:-4}"
-FAILED_LOG="failed_downloads.log"
-RETRY_FILE="retry_downloads.txt"
-RUN_LOG="fetch_run.log"
+MUSIC_DIR="${1:-$DEFAULT_MUSIC_DIR}"
+REPORT_FILE="${2:-$DEFAULT_REPORT_FILE}"
+TARGET_SIZE="${3:-$DEFAULT_TARGET_SIZE}"
+MIN_SIZE="${4:-$DEFAULT_MIN_SIZE}"
+MAX_JOBS="${5:-$DEFAULT_MAX_JOBS}"
 
 echo "Checking system requirements..."
 MISSING_DEPS=0
@@ -170,7 +183,6 @@ echo "-------------------------------------------------------------"
 
 export SCRIPT_PATH="$(realpath "$0")"
 
-# We feed the report into xargs, and pipe the background workers' output into pv so it ticks up upon completion
 grep -v '^$' "$REPORT_FILE" | tr '\n' '\0' | xargs -0 -I {} -P "$MAX_JOBS" bash -c '
   "$SCRIPT_PATH" --worker "$0" "$1" "$2" "$3" "$4" "$5" "$6"
 ' {} "$MUSIC_DIR" "$TARGET_SIZE" "$MIN_SIZE" "$FAILED_LOG" "$RETRY_FILE" "$RUN_LOG" | pv -l -s "$TOTAL_ALBUMS" -N "Albums Processed" > /dev/null
